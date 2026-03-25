@@ -12,7 +12,7 @@ func _on_timer_timeout():
 		
 	var enemy = enemy_scene.instantiate()
 	
-	var spawn_radius = 600.0
+	var spawn_radius = 800.0
 	var random_angle = randf() * PI * 2
 	var spawn_offset = Vector2(cos(random_angle), sin(random_angle)) * spawn_radius
 	

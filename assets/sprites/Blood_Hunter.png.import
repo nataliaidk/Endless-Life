@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bs4pbwjwttab0"
-path="res://.godot/imported/enemy.png-f7d9f81714867a24a08e299bb600e611.ctex"
+uid="uid://bu7gkcmm4cjs8"
+path="res://.godot/imported/Blood_Hunter.png-93b3f08b54189f45b7bb9ce299050ec2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy.png"
-dest_files=["res://.godot/imported/enemy.png-f7d9f81714867a24a08e299bb600e611.ctex"]
+source_file="res://assets/sprites/Blood_Hunter.png"
+dest_files=["res://.godot/imported/Blood_Hunter.png-93b3f08b54189f45b7bb9ce299050ec2.ctex"]
 
 [params]
 

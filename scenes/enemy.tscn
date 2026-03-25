@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cwpu70mh6miqo"]
+
+[ext_resource type="Script" uid="uid://b5baw3330n8b0" path="res://scripts/enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://cv2gs2mbam6s1" path="res://assets/sprites/Huntsman_1.png" id="2_md0e3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ra3w"]
+radius = 43.0
+height = 134.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(35, 0, 242, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4w8v"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(277, 0, 242, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(519, 0, 242, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(761, 0, 242, 263)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
+atlas = ExtResource("2_md0e3")
+region = Rect2(1003, 0, 242, 263)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ipns3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4w8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwavj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nenq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md484")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="CharacterBody2D" unique_id=889554033]
+script = ExtResource("1_4gyqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1962211900]
+shape = SubResource("CapsuleShape2D_4ra3w")
+debug_color = Color(0.83042645, 0.3375644, 0.5313467, 0.41960785)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=144311692]
+offset_left = -64.0
+offset_top = -6.0
+offset_right = 54.0
+offset_bottom = 21.0
+max_value = 20.0
+show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=891506310]
+sprite_frames = SubResource("SpriteFrames_ipns3")
+animation = &"walk_down"
