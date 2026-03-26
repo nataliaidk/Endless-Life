@@ -5,8 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cwpu70mh6miqo" path="res://scenes/enemy.tscn" id="3_iywne"]
 
 [node name="Game" type="Node2D" unique_id=1073483244]
+y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=1140903298 instance=ExtResource("1_lnu2h")]
 
 [node name="EnemySpawner" parent="." unique_id=662883454 instance=ExtResource("2_lbhrr")]
+y_sort_enabled = true
 enemy_scene = ExtResource("3_iywne")

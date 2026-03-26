@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cv2gs2mbam6s1"
-path="res://.godot/imported/Huntsman_1.png-32de920c479e1c42d53b969721bce528.ctex"
+path="res://.godot/imported/Huntsman.png-3ba63d6a3c5cd39d1274c6b4112cc39b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Huntsman_1.png"
-dest_files=["res://.godot/imported/Huntsman_1.png-32de920c479e1c42d53b969721bce528.ctex"]
+source_file="res://assets/sprites/Huntsman.png"
+dest_files=["res://.godot/imported/Huntsman.png-3ba63d6a3c5cd39d1274c6b4112cc39b.ctex"]
 
 [params]
 
