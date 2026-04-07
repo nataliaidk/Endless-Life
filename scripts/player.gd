@@ -10,12 +10,12 @@ const WEAPONS_TEXTURE := preload("res://assets/sprites/Weapons.png")
 const WEAPONS_GRID_COLUMNS := 4
 const WEAPONS_GRID_ROWS := 5
 const WEAPON_UPGRADE_POOL := [
-	{"id": "hunter_axe", "name": "Hunter Axe", "damage_bonus": 18, "range_bonus": 10.0, "icon_cell": Vector2i(0, 0)},
-	{"id": "saw_cleaver", "name": "Saw Cleaver", "damage_bonus": 14, "range_bonus": 16.0, "icon_cell": Vector2i(1, 0)},
-	{"id": "kirkhammer", "name": "Kirkhammer", "damage_bonus": 22, "range_bonus": 6.0, "icon_cell": Vector2i(2, 0)},
-	{"id": "threaded_cane", "name": "Threaded Cane", "damage_bonus": 10, "range_bonus": 26.0, "icon_cell": Vector2i(3, 0)},
-	{"id": "ludwig_blade", "name": "Ludwig Blade", "damage_bonus": 16, "range_bonus": 14.0, "icon_cell": Vector2i(0, 1)},
-	{"id": "beast_claw", "name": "Beast Claw", "damage_bonus": 12, "range_bonus": 20.0, "icon_cell": Vector2i(1, 1)}
+	{"id": "hunter_axe", "name": "Hunter Axe", "damage_bonus": 30, "range_bonus": 10.0, "icon_cell": Vector2i(0, 0)},
+	{"id": "saw_cleaver", "name": "Saw Cleaver", "damage_bonus": 28, "range_bonus": 16.0, "icon_cell": Vector2i(1, 0)},
+	{"id": "kirkhammer", "name": "Kirkhammer", "damage_bonus": 40, "range_bonus": 6.0, "icon_cell": Vector2i(2, 0)},
+	{"id": "threaded_cane", "name": "Threaded Cane", "damage_bonus": 20, "range_bonus": 26.0, "icon_cell": Vector2i(3, 0)},
+	{"id": "ludwig_blade", "name": "Ludwig Blade", "damage_bonus": 35, "range_bonus": 14.0, "icon_cell": Vector2i(0, 1)},
+	{"id": "beast_claw", "name": "Beast Claw", "damage_bonus": 27, "range_bonus": 20.0, "icon_cell": Vector2i(1, 1)}
 ]
 
 var speed := 200.0
@@ -25,7 +25,7 @@ var is_dead := false
 var facing_direction := Vector2.DOWN
 
 @export var axe_damage := 55
-@export var axe_range := 95.0
+@export var axe_range := 200.0
 @export var axe_arc_degrees := 100.0
 @export var axe_cooldown := 0.55
 @export var heal_percent_on_kill := 0.07
@@ -222,7 +222,7 @@ func _setup_level_up_ui() -> void:
 
 	var subtitle := Label.new()
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.text = "Wybierz 1 bron na stale"
+	subtitle.text = "Pick one item"
 	vbox.add_child(subtitle)
 
 	var choices := HBoxContainer.new()
@@ -347,3 +347,6 @@ func _apply_upgrade(upgrade: Dictionary) -> void:
 
 	if not unlocked_upgrade_ids.has(upgrade_id):
 		unlocked_upgrade_ids.append(upgrade_id)
+
+func get_level() -> int:
+	return player_level
