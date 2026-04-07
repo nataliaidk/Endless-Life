@@ -11,6 +11,7 @@ func _on_timer_timeout():
 		return
 		
 	var enemy = enemy_scene.instantiate()
+	enemy.add_to_group("enemies")
 	
 	var spawn_radius = 800.0
 	var random_angle = randf() * PI * 2

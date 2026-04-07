@@ -10,11 +10,12 @@ var enemies_group := "enemies"
 func setup(weapon_data: WeaponData, player_node: Node2D) -> void:
 	data = weapon_data
 	player = player_node
-
-func _ready() -> void:
 	timer.wait_time = data.cooldown
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
+
+func _ready() -> void:
+	pass
 
 func _on_timer_timeout() -> void:
 	_do_attack()
@@ -25,7 +26,8 @@ func _do_attack() -> void:
 func get_enemies_sorted_by_distance() -> Array[Node2D]:
 	var enemies: Array[Node2D] = []
 	for e in get_tree().get_nodes_in_group(enemies_group):
-		enemies.append(e as Node2D)
+		if is_instance_valid(e) and not e.is_dead:
+			enemies.append(e as Node2D)
 	enemies.sort_custom(func(a, b):
 		return a.global_position.distance_to(player.global_position) \
 			 < b.global_position.distance_to(player.global_position)

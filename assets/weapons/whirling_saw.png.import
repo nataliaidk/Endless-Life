@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://56m4hb42owc0"
-path="res://.godot/imported/Weapons.png-d84cd3defeec5dd2b6bb8bccfa343ffb.ctex"
+uid="uid://blcqq1keisg55"
+path="res://.godot/imported/whirling_saw.png-425e83b1ee8b0b28bee84eb47cd66169.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Weapons.png"
-dest_files=["res://.godot/imported/Weapons.png-d84cd3defeec5dd2b6bb8bccfa343ffb.ctex"]
+source_file="res://assets/weapons/whirling_saw.png"
+dest_files=["res://.godot/imported/whirling_saw.png-425e83b1ee8b0b28bee84eb47cd66169.ctex"]
 
 [params]
 

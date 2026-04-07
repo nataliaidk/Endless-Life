@@ -9,7 +9,6 @@ var speed := 75
 var max_health := 100
 var health := max_health
 var damage := 25
-var knockback := 5
 var is_dead := false
 
 func _ready():
@@ -37,10 +36,10 @@ func update_animation(direction: Vector2):
 		else:
 			sprite.play("walk_up")
 
-func take_damage(attack: Attack):
+func take_damage(damage: int):
 	if is_dead:
 		return
-	health -= attack.damage
+	health -= damage
 	health_bar.value = health
 	if health <= 0:
 		die()
@@ -49,6 +48,7 @@ func die():
 	is_dead = true
 	velocity = Vector2.ZERO
 	sprite.play("die")
+	await sprite.animation_finished
 	queue_free()
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
@@ -69,8 +69,4 @@ func _on_damage_timer_timeout():
 		attack()
 
 func attack():
-	var attack = Attack.new()
-	attack.damage = damage
-	attack.knockback = knockback
-	attack.position = global_position
-	player_in_range.take_damage(attack)
+	player_in_range.take_damage(damage)

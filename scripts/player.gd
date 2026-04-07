@@ -10,16 +10,21 @@ var speed := 200.0
 var max_health := 100
 var health := max_health
 var is_dead := false
+var facing_direction := 1
 
 func _ready():
 	camera.make_current()
 	health_bar.value = health
 	health_bar.max_value = max_health
+	var whip_data = load("res://data/whip_data.tres")
+	$WeaponManager.add_weapon(whip_data)
 
 func _physics_process(_delta):
 	if is_dead:
 		return
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if direction.x != 0:
+		facing_direction = sign(direction.x)
 	velocity = direction * speed
 	move_and_slide()
 	update_animation(direction)
@@ -39,10 +44,10 @@ func update_animation(direction: Vector2):
 			else:
 				sprite.play("walk_up")
 
-func take_damage(attack: Attack):
+func take_damage(damage: int):
 	if is_dead:
 		return
-	health -= attack.damage
+	health -= damage
 	health_bar.value = health
 	if health <= 0:
 		die()
