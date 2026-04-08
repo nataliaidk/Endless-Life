@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cgixofxjk8ylm"]
 
 [ext_resource type="Script" uid="uid://bcrbdmorebsqq" path="res://scripts/player.gd" id="1_ij6vw"]
-[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/sprites/healthbar_background.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/ui/healthbar_background.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bu7gkcmm4cjs8" path="res://assets/sprites/Blood_Hunter.png" id="2_onrkg"]
-[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/sprites/healthbar_progress.png" id="3_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/ui/healthbar_progress.png" id="3_qlg0r"]
 [ext_resource type="Script" uid="uid://g1dq0i8rmfpm" path="res://scripts/weapon_manager.gd" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]

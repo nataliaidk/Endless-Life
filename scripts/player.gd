@@ -19,7 +19,7 @@ const WEAPON_UPGRADE_POOL := [
 ]
 
 var speed := 200.0
-var max_health := 300
+var max_health := 100
 var health := max_health
 var is_dead := false
 var facing_direction := Vector2.DOWN
@@ -55,6 +55,7 @@ func _ready():
 	health_bar.max_value = max_health
 	var whip_data = load("res://data/whip_data.tres")
 	$WeaponManager.add_weapon(whip_data)
+	GameTimer.start()
 	_setup_level_up_ui()
 	_update_exp_ui()
 
@@ -65,51 +66,12 @@ func _physics_process(_delta):
 	if direction != Vector2.ZERO:
 		facing_direction = direction.normalized()
 
-	if Input.is_action_just_pressed("attack") and can_attack:
-		_start_axe_attack()
-
 	if is_attacking:
 		velocity = Vector2.ZERO
 	else:
 		velocity = direction * speed
 	move_and_slide()
 	update_animation(direction if not is_attacking else Vector2.ZERO)
-
-func _start_axe_attack():
-	can_attack = false
-	is_attacking = true
-	_perform_axe_hit()
-
-	var lock_timer := get_tree().create_timer(axe_attack_lock_time)
-	await lock_timer.timeout
-	is_attacking = false
-
-	var cooldown_timer := get_tree().create_timer(max(0.0, axe_cooldown - axe_attack_lock_time))
-	await cooldown_timer.timeout
-	can_attack = true
-
-func _perform_axe_hit() -> void:
-	# The axe is short range but high damage; we hit only enemies in front of the player.
-	var half_arc_cos := cos(deg_to_rad(axe_arc_degrees * 0.5))
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if not enemy is Node2D:
-			continue
-		if not enemy.has_method("take_damage"):
-			continue
-
-		var to_enemy := global_position.direction_to(enemy.global_position)
-		var distance := global_position.distance_to(enemy.global_position)
-		if distance > axe_range:
-			continue
-
-		if facing_direction.dot(to_enemy) < half_arc_cos:
-			continue
-
-		var attack := Attack.new()
-		attack.damage = axe_damage
-		attack.knockback = 0.0
-		attack.position = global_position
-		enemy.take_damage(attack)
 
 func update_animation(direction: Vector2):
 	if is_attacking:
@@ -148,9 +110,9 @@ func gain_blood_exp(amount: int) -> void:
 	if is_dead or amount <= 0:
 		return
 	blood_exp += amount
-	_heal_after_enemy_kill()
-	_update_exp_ui()
-	_try_trigger_level_up()
+	#_heal_after_enemy_kill()
+	#_update_exp_ui()
+	#_try_trigger_level_up()
 
 func _try_trigger_level_up() -> void:
 	if level_up_in_progress or is_dead:

@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bcn8w4co7show"]
+
+[ext_resource type="Script" uid="uid://cyxvhrl0s5vh2" path="res://scripts/enemies/rat.gd" id="1_orb1r"]
+[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/ui/healthbar_background.png" id="2_6756y"]
+[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/ui/healthbar_progress.png" id="3_fxid1"]
+[ext_resource type="Texture2D" uid="uid://bfml0fjtw14sd" path="res://assets/enemies/rat_dark_grey.png" id="4_ohayx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s34g"]
+atlas = ExtResource("4_ohayx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_368s2"]
+atlas = ExtResource("4_ohayx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnna8"]
+atlas = ExtResource("4_ohayx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po2hf"]
+atlas = ExtResource("4_ohayx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0g0h3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s34g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_368s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnna8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po2hf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ux2h"]
+radius = 8.0
+height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 6.0
+
+[node name="Rat" type="CharacterBody2D" unique_id=774804790 groups=["enemies"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 3
+platform_on_leave = 2
+platform_floor_layers = 4294967040
+script = ExtResource("1_orb1r")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1511335069]
+offset_left = -26.0
+offset_top = 14.0
+offset_right = 26.0
+offset_bottom = 32.0
+scale = Vector2(0.55, 0.55)
+texture_under = ExtResource("2_6756y")
+texture_progress = ExtResource("3_fxid1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=244863342]
+position = Vector2(-5.000001, -17.999998)
+scale = Vector2(2.034375, 1.9875001)
+sprite_frames = SubResource("SpriteFrames_0g0h3")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1082149383]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=2064393938]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1ux2h")
+debug_color = Color(0.8901961, 0.22745098, 0.5921569, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1923754013]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=1549840288]
+wait_time = 0.9
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
