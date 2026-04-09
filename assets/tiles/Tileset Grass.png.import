@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drr0bcl6cg2vx"
-path="res://.godot/imported/TX Props.png-8c9a84379ca12f5d8a22700766e75642.ctex"
+uid="uid://dvi5lywt8xjae"
+path="res://.godot/imported/Tileset Grass.png-d69927395d3e55838c986866c3256c0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/TX Props.png"
-dest_files=["res://.godot/imported/TX Props.png-8c9a84379ca12f5d8a22700766e75642.ctex"]
+source_file="res://assets/tiles/Tileset Grass.png"
+dest_files=["res://.godot/imported/Tileset Grass.png-d69927395d3e55838c986866c3256c0a.ctex"]
 
 [params]
 
