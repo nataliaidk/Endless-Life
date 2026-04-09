@@ -8,6 +8,10 @@ signal exp_gained(amount: int)
 @onready var weapon_manager: WeaponManager = $WeaponManager
 @onready var leveling: Node = $PlayerLeveling
 @onready var ui: Node = $PlayerUI
+@onready var audio = $AudioStreamPlayer
+
+@export var die_sound: AudioStream
+@export var hurt_sounds: Array[AudioStream]
 
 var speed := 200.0
 var max_health := 100
@@ -50,17 +54,24 @@ func take_damage(attack: Attack):
 	health_bar.value = health
 	if health <= 0:
 		die()
+	else:
+		audio.stream = hurt_sounds.pick_random()
+		audio.play()
 
 func heal(amount: int):
 	health = min(max_health, health + amount)
 	health_bar.value = health
 
 func die():
+	audio.stream = die_sound
+	audio.play()
 	is_dead = true
 	is_attacking = false
 	velocity = Vector2.ZERO
-	sprite.play("die")
 	weapon_manager.disable_all()
+	sprite.play("die")
+	await sprite.animation_finished
+	get_tree().change_scene_to_file("res://scenes/game/death_screen.tscn")
 
 func gain_blood_exp(amount: int):
 	if is_dead or amount <= 0:

@@ -1,15 +1,21 @@
 [gd_scene format=3 uid="uid://dned6v81jglad"]
 
 [ext_resource type="PackedScene" uid="uid://cgixofxjk8ylm" path="res://scenes/player/player.tscn" id="1_7h61r"]
-[ext_resource type="Script" uid="uid://bc03w8bjncwi1" path="res://scripts/game/game.gd" id="1_kelw5"]
+[ext_resource type="Script" path="res://scripts/game/game.gd" id="1_kelw5"]
 [ext_resource type="PackedScene" uid="uid://c1nbty17pl3sx" path="res://scenes/game/enemy_spawner.tscn" id="2_0sr1o"]
+[ext_resource type="AudioStream" uid="uid://crxi7h0xqueox" path="res://assets/sounds/male death.mp3" id="3_87uf6"]
+[ext_resource type="AudioStream" uid="uid://cdev14qm7jhnw" path="res://assets/sounds/male hurt 1.mp3" id="4_2a8rs"]
 [ext_resource type="AudioStream" uid="uid://cev202yop7q8j" path="res://assets/music/Unholy Invocation.mp3" id="4_lfrn8"]
+[ext_resource type="AudioStream" uid="uid://c0g07r3qcix15" path="res://assets/sounds/male hurt 2.mp3" id="5_4j704"]
+[ext_resource type="AudioStream" uid="uid://bhv4aqea3wd3n" path="res://assets/sounds/male hurt 3.mp3" id="6_kp23o"]
 
 [node name="Game" type="Node2D" unique_id=1073483244]
 y_sort_enabled = true
 script = ExtResource("1_kelw5")
 
 [node name="Player" parent="." unique_id=1140903298 instance=ExtResource("1_7h61r")]
+die_sound = ExtResource("3_87uf6")
+hurt_sounds = Array[AudioStream]([ExtResource("4_2a8rs"), ExtResource("5_4j704"), ExtResource("6_kp23o")])
 
 [node name="EnemySpawner" parent="." unique_id=662883454 instance=ExtResource("2_0sr1o")]
 y_sort_enabled = true

@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://vkfx53p8na5r"]
+
+[ext_resource type="Script" uid="uid://dcrooow8f1i2h" path="res://scripts/game/death_screen.gd" id="1_gbdnc"]
+[ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="2_gf2gt"]
+[ext_resource type="AudioStream" uid="uid://cy54opqcn65xb" path="res://assets/sounds/You Died.mp3" id="3_gf2gt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7egq5"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fo52"]
+bg_color = Color(0.28118682, 0.28118688, 0.2811868, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmf1"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dj74p"]
+
+[node name="DeathScreen" type="Control" unique_id=241632319]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gbdnc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1564874032]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1646332443]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.5
+offset_top = -42.5
+offset_right = 90.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8627451, 0.078431375, 0.23529412, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 6
+theme_override_fonts/font = ExtResource("2_gf2gt")
+theme_override_font_sizes/font_size = 84
+text = "You Died"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1403688716]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = 101.0
+offset_right = 87.5
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Back" type="Button" parent="VBoxContainer" unique_id=1277209109]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_gf2gt")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_7egq5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6fo52")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fgmf1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dj74p")
+text = "Back"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=11315528]
+stream = ExtResource("3_gf2gt")
+volume_db = -20.0
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

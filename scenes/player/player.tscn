@@ -248,3 +248,5 @@ script = ExtResource("6_tuyoq")
 
 [node name="PlayerUI" type="CanvasLayer" parent="." unique_id=513230100]
 script = ExtResource("7_fjrip")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=446460250]
