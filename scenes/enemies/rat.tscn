@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://bcn8w4co7show"]
 
 [ext_resource type="Script" uid="uid://cyxvhrl0s5vh2" path="res://scripts/enemies/rat.gd" id="1_orb1r"]
-[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/ui/healthbar_background.png" id="2_6756y"]
-[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/ui/healthbar_progress.png" id="3_fxid1"]
 [ext_resource type="Texture2D" uid="uid://bfml0fjtw14sd" path="res://assets/enemies/rat_dark_grey.png" id="4_ohayx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6s34g"]
@@ -59,16 +57,6 @@ collision_mask = 8
 platform_on_leave = 2
 platform_floor_layers = 4294967040
 script = ExtResource("1_orb1r")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1511335069]
-z_index = 3
-offset_left = -26.0
-offset_top = 14.0
-offset_right = 26.0
-offset_bottom = 32.0
-scale = Vector2(0.55, 0.55)
-texture_under = ExtResource("2_6756y")
-texture_progress = ExtResource("3_fxid1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=244863342]
 position = Vector2(-5.000001, -17.999998)

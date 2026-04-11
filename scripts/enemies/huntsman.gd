@@ -21,3 +21,8 @@ func _on_death_effects() -> void:
 	sprite.play("die")
 	await sprite.animation_finished
 	queue_free()
+
+func flash_red():
+	sprite.modulate = Color(1, 0.3, 0.3)
+	await get_tree().create_timer(0.2).timeout
+	sprite.modulate = Color(1, 1, 1) 

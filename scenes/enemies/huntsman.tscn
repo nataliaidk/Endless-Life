@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://cwpu70mh6miqo"]
 
 [ext_resource type="Script" uid="uid://b5baw3330n8b0" path="res://scripts/enemies/huntsman.gd" id="1_4gyqm"]
-[ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/ui/healthbar_background.png" id="2_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://cv2gs2mbam6s1" path="res://assets/enemies/huntsman.png" id="2_md0e3"]
-[ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/ui/healthbar_progress.png" id="3_c4w8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
 atlas = ExtResource("2_md0e3")
@@ -200,15 +198,6 @@ collision_mask = 8
 platform_on_leave = 2
 platform_floor_layers = 4294901760
 script = ExtResource("1_4gyqm")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=926257288]
-z_index = 3
-offset_left = -39.0
-offset_top = 57.0
-offset_right = 53.0
-offset_bottom = 97.0
-texture_under = ExtResource("2_5uy6h")
-texture_progress = ExtResource("3_c4w8v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=891506310]
 scale = Vector2(0.6, 0.6)

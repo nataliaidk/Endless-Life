@@ -61,11 +61,17 @@ func take_damage(attack: Attack):
 		return
 	health -= attack.damage
 	health_bar.value = health
+	flash_red()
 	if health <= 0:
 		die()
 	else:
 		audio.stream = hurt_sounds.pick_random()
 		audio.play()
+
+func flash_red():
+	sprite.modulate = Color(1, 0.3, 0.3)
+	await get_tree().create_timer(0.2).timeout
+	sprite.modulate = Color(1, 1, 1) 
 
 func heal(amount: int):
 	health = min(max_health, health + amount)

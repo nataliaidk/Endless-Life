@@ -1,7 +1,6 @@
 class_name BaseEnemy
 extends CharacterBody2D
 
-@onready var health_bar: TextureProgressBar = $TextureProgressBar
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
 @export var blood_exp_reward := 1
 
@@ -17,8 +16,6 @@ var _player_in_range: Node2D = null
 
 func _ready() -> void:
 	health = max_health
-	health_bar.max_value = max_health
-	health_bar.value     = health
 	_setup_visuals()
 
 func _physics_process(_delta: float) -> void:
@@ -42,15 +39,18 @@ func _update_animation(_dir: Vector2) -> void:
 ## Dodatkowe działania przy śmierci (np. animacja die).
 func _on_death_effects() -> void:
 	queue_free()
-
+	
+func flash_red():
+	pass
+	
 # ── walka ─────────────────────────────────────────────────────────────────────
 
 func take_damage(attack: Attack) -> void:
 	if is_dead:
 		return
 	health -= attack.damage
-	health_bar.value = health
 	_spawn_blood(blood_lifetime * 0.8, 16.0)
+	flash_red()
 	if health <= 0:
 		die()
 
@@ -61,7 +61,6 @@ func die() -> void:
 	if is_instance_valid(player) and player.has_method("gain_blood_exp"):
 		player.gain_blood_exp(blood_exp_reward)
 	velocity = Vector2.ZERO
-	health_bar.hide()
 	$HurtboxArea.monitoring = false
 	$Collision.set_deferred("disabled", true)
 	$DamageTimer.stop()
@@ -85,7 +84,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	attack()
 	$DamageTimer.start()
 
-func _on_area_area_exited(area: Area2D) -> void:
+func _on_hitbox_area_exited(area: Area2D) -> void:
 	if area == _player_in_range:
 		_player_in_range = null
 		$DamageTimer.stop()
