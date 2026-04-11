@@ -48,15 +48,20 @@ height = 38.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
 radius = 6.0
 
-[node name="Rat" type="CharacterBody2D" unique_id=774804790 groups=["enemies"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_orb1r"]
+radius = 9.0
+
+[node name="Rat" type="CharacterBody2D" unique_id=774804790]
+z_index = 1
 y_sort_enabled = true
-collision_layer = 2
-collision_mask = 3
+collision_layer = 8
+collision_mask = 8
 platform_on_leave = 2
 platform_floor_layers = 4294967040
 script = ExtResource("1_orb1r")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1511335069]
+z_index = 3
 offset_left = -26.0
 offset_top = 14.0
 offset_right = 26.0
@@ -70,21 +75,31 @@ position = Vector2(-5.000001, -17.999998)
 scale = Vector2(2.034375, 1.9875001)
 sprite_frames = SubResource("SpriteFrames_0g0h3")
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1082149383]
-collision_layer = 4
+[node name="HitboxArea" type="Area2D" parent="." unique_id=1082149383]
+collision_layer = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=2064393938]
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxArea" unique_id=2064393938]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_1ux2h")
 debug_color = Color(0.8901961, 0.22745098, 0.5921569, 0.41960785)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1923754013]
+[node name="HurtboxArea" type="Area2D" parent="." unique_id=1348918096 groups=["enemies"]]
 rotation = 1.5707964
+collision_layer = 2
+collision_mask = 5
+
+[node name="Hurtbox" type="CollisionShape2D" parent="HurtboxArea" unique_id=1923754013 groups=["enemies"]]
 shape = SubResource("CapsuleShape2D_body")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=372273549]
+position = Vector2(1, 5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_orb1r")
+debug_color = Color(0.1764706, 0.9098039, 0.1882353, 0.41960785)
 
 [node name="DamageTimer" type="Timer" parent="." unique_id=1549840288]
 wait_time = 0.9
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="area_entered" from="HitboxArea" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="HitboxArea" to="." method="_on_hitbox_area_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

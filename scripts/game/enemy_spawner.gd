@@ -25,9 +25,9 @@ func _ready() -> void:
 func _build_table() -> void:
 	_table.clear()
 	if huntsman_scene:
-		_table.append(SpawnEntry.new(huntsman_scene, 5.0, 0.0, 1, 1))
+		_table.append(SpawnEntry.new(huntsman_scene, 8.0, 0.0, 1, 1))
 	if rat_scene:
-		_table.append(SpawnEntry.new(rat_scene, 2.0, 10.0, 1, 5))
+		_table.append(SpawnEntry.new(rat_scene, 1.0, 15.0, 2, 5))
 
 func _on_timer_timeout() -> void:
 	var player := get_tree().get_first_node_in_group("player")

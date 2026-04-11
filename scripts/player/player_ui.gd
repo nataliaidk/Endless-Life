@@ -86,6 +86,7 @@ func _build_ui():
 	level_up_panel.visible = false
 
 func _on_level_up_ready(choices: Array[Dictionary]):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_current_choices = choices
 	level_up_title.text = "LEVEL %d → %d" % [leveling.player_level, leveling.player_level + 1]
 	for i in range(level_up_buttons.size()):
@@ -101,6 +102,7 @@ func _on_level_up_ready(choices: Array[Dictionary]):
 
 func _on_choice_pressed(index: int):
 	level_up_panel.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 	leveling.on_upgrade_chosen(index, _current_choices)
 	_refresh_exp_bar()

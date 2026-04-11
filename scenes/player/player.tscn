@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bcrbdmorebsqq" path="res://scripts/player/player.gd" id="1_ij6vw"]
 [ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/ui/healthbar_background.png" id="2_dqkch"]
+[ext_resource type="AudioStream" uid="uid://crxi7h0xqueox" path="res://assets/sounds/male death.mp3" id="2_je7p5"]
 [ext_resource type="Texture2D" uid="uid://bu7gkcmm4cjs8" path="res://assets/sprites/Blood_Hunter.png" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://cdev14qm7jhnw" path="res://assets/sounds/male hurt 1.mp3" id="3_fm80t"]
 [ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/ui/healthbar_progress.png" id="3_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://c0g07r3qcix15" path="res://assets/sounds/male hurt 2.mp3" id="4_gx1jg"]
 [ext_resource type="Script" uid="uid://g1dq0i8rmfpm" path="res://scripts/player/weapon_manager.gd" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://bhv4aqea3wd3n" path="res://assets/sounds/male hurt 3.mp3" id="5_ugbui"]
 [ext_resource type="Script" uid="uid://b2j8l78ltt3un" path="res://scripts/player/player_leveling.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://ctw5aasp0qrnv" path="res://scripts/player/player_ui.gd" id="7_fjrip"]
 
@@ -213,15 +217,24 @@ animations = [{
 radius = 19.0
 height = 58.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0owmy"]
+radius = 11.0
+height = 34.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1140903298 groups=["player"]]
-collision_mask = 0
+z_index = 1
+collision_layer = 8
+collision_mask = 8
 platform_on_leave = 2
 platform_floor_layers = 4294901760
 script = ExtResource("1_ij6vw")
+die_sound = ExtResource("2_je7p5")
+hurt_sounds = Array[AudioStream]([ExtResource("3_fm80t"), ExtResource("4_gx1jg"), ExtResource("5_ugbui")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1800044419]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1762087543]
+z_index = 3
 offset_left = -41.0
 offset_top = 47.0
 offset_right = 51.0
@@ -235,10 +248,19 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_dw050")
 animation = &"idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=280885015]
-y_sort_enabled = true
+[node name="HurtboxArea" type="Area2D" parent="." unique_id=1307745962 groups=["player"]]
 position = Vector2(1, 0)
+collision_mask = 16
+
+[node name="Hurtbox" type="CollisionShape2D" parent="HurtboxArea" unique_id=280885015 groups=["player"]]
+y_sort_enabled = true
 shape = SubResource("CapsuleShape2D_b26j0")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1784500337]
+position = Vector2(1, 32)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0owmy")
+debug_color = Color(0.1764706, 0.9098039, 0.1882353, 0.41960785)
 
 [node name="WeaponManager" type="Node2D" parent="." unique_id=101019310]
 script = ExtResource("5_qlg0r")

@@ -10,7 +10,7 @@ huntsman_scene = ExtResource("2_xl0gr")
 rat_scene = ExtResource("2_devoi")
 
 [node name="Timer" type="Timer" parent="." unique_id=1122545698]
-wait_time = 2.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

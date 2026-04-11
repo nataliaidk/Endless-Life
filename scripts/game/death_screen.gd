@@ -7,6 +7,7 @@ var hover_sound := preload("res://assets/sounds/button hover.mp3")
 @onready var timer_label = $TimerLabel
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	timer_label.text = "Survived for %02d' %02ds" % [int(GameTimer.seconds()) / 60, int(GameTimer.seconds()) % 60]
 	back_button.mouse_entered.connect(_on_hover)
 

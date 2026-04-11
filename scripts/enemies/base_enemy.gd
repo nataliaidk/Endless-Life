@@ -62,8 +62,8 @@ func die() -> void:
 		player.gain_blood_exp(blood_exp_reward)
 	velocity = Vector2.ZERO
 	health_bar.hide()
-	$Hitbox.monitoring = false
-	$CollisionShape2D.set_deferred("disabled", true)
+	$HurtboxArea.monitoring = false
+	$Collision.set_deferred("disabled", true)
 	$DamageTimer.stop()
 	_spawn_blood(blood_lifetime * 1.3, 35.0)
 	_on_death_effects()
@@ -74,19 +74,19 @@ func attack() -> void:
 	var atk := Attack.new()
 	atk.damage   = damage
 	atk.position = global_position
-	_player_in_range.take_damage(atk)
+	_player_in_range.get_parent().take_damage(atk)
 
 # ── sygnały hitboxa / timera ─────────────────────────────────────────────────
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if is_dead or not body.is_in_group("player"):
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if is_dead or not area.is_in_group("player"):
 		return
-	_player_in_range = body
+	_player_in_range = area
 	attack()
 	$DamageTimer.start()
 
-func _on_hitbox_body_exited(body: Node2D) -> void:
-	if body == _player_in_range:
+func _on_area_area_exited(area: Area2D) -> void:
+	if area == _player_in_range:
 		_player_in_range = null
 		$DamageTimer.stop()
 

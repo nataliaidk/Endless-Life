@@ -188,15 +188,21 @@ height = 70.0
 radius = 19.0
 height = 60.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=889554033 groups=["enemies"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jqn6g"]
+radius = 12.0
+height = 40.0
+
+[node name="Huntsman" type="CharacterBody2D" unique_id=889554033]
+z_index = 1
 y_sort_enabled = true
-collision_layer = 2
-collision_mask = 3
+collision_layer = 8
+collision_mask = 8
 platform_on_leave = 2
 platform_floor_layers = 4294901760
 script = ExtResource("1_4gyqm")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=926257288]
+z_index = 3
 offset_left = -39.0
 offset_top = 57.0
 offset_right = 53.0
@@ -209,19 +215,29 @@ scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_ipns3")
 animation = &"walk_down"
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=1799178899]
-collision_layer = 4
+[node name="HitboxArea" type="Area2D" parent="." unique_id=1799178899]
+collision_layer = 18
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=845764093]
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxArea" unique_id=845764093]
 shape = SubResource("CapsuleShape2D_md0e3")
 debug_color = Color(0.8902925, 0.22565496, 0.594003, 0.41960785)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1962211900]
+[node name="HurtboxArea" type="Area2D" parent="." unique_id=1293647611 groups=["enemies"]]
+collision_layer = 2
+collision_mask = 5
+
+[node name="Hurtbox" type="CollisionShape2D" parent="HurtboxArea" unique_id=1962211900 groups=["enemies"]]
 shape = SubResource("CapsuleShape2D_4ra3w")
 debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
 
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=36366708]
+position = Vector2(0, 43)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jqn6g")
+debug_color = Color(0.1764706, 0.9098039, 0.1882353, 0.41960785)
+
 [node name="DamageTimer" type="Timer" parent="." unique_id=1591395709]
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="area_entered" from="HitboxArea" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="HitboxArea" to="." method="_on_hitbox_area_exited"]
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
