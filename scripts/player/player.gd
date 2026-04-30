@@ -6,8 +6,6 @@ signal exp_gained(amount: int)
 @onready var camera := $Camera2D
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 @onready var weapon_manager: WeaponManager = $WeaponManager
-@onready var leveling: Node = $PlayerLeveling
-@onready var ui: Node = $PlayerUI
 @onready var audio = $AudioStreamPlayer
 
 @export var die_sound: AudioStream
@@ -89,11 +87,10 @@ func die():
 	await sprite.animation_finished
 	get_tree().change_scene_to_file("res://scenes/game/death_screen.tscn")
 
-func gain_blood_exp(amount: int):
+func add_kill():
+	$HUD.add_kill()
+
+func gain_xp(amount: int):
 	if is_dead or amount <= 0:
 		return
 	exp_gained.emit(amount)
-
-func get_level() -> int:
-	return leveling.player_level
-	

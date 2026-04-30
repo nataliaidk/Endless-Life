@@ -9,8 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://c0g07r3qcix15" path="res://assets/sounds/male hurt 2.mp3" id="4_gx1jg"]
 [ext_resource type="Script" uid="uid://g1dq0i8rmfpm" path="res://scripts/player/weapon_manager.gd" id="5_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://bhv4aqea3wd3n" path="res://assets/sounds/male hurt 3.mp3" id="5_ugbui"]
-[ext_resource type="Script" uid="uid://b2j8l78ltt3un" path="res://scripts/player/player_leveling.gd" id="6_tuyoq"]
-[ext_resource type="Script" uid="uid://ctw5aasp0qrnv" path="res://scripts/player/player_ui.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://b2j8l78ltt3un" path="res://scripts/leveling/player_leveling.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://ctw5aasp0qrnv" path="res://scripts/leveling/level_up_menu.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://c6ihn5a7s3o0y" path="res://scripts/player/player_hud.gd" id="11_fm80t"]
+[ext_resource type="AudioStream" uid="uid://bi70lqwsprl26" path="res://assets/sounds/xp_gained.mp3" id="12_fm80t"]
+[ext_resource type="AudioStream" uid="uid://dsoqnkd65nv28" path="res://assets/sounds/level_up.mp3" id="14_ugbui"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("2_onrkg")
@@ -232,6 +235,11 @@ die_sound = ExtResource("2_je7p5")
 hurt_sounds = Array[AudioStream]([ExtResource("3_fm80t"), ExtResource("4_gx1jg"), ExtResource("5_ugbui")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1800044419]
+limit_enabled = false
+limit_left = -5000
+limit_top = 5000
+limit_right = 5000
+limit_bottom = -5000
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=1762087543]
 z_index = 3
@@ -268,8 +276,20 @@ script = ExtResource("5_qlg0r")
 [node name="PlayerLeveling" type="Node2D" parent="." unique_id=343121902]
 script = ExtResource("6_tuyoq")
 
-[node name="PlayerUI" type="CanvasLayer" parent="." unique_id=513230100]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=513230100]
+script = ExtResource("11_fm80t")
+
+[node name="LevelUpMenu" type="CanvasLayer" parent="." unique_id=1698592873]
 script = ExtResource("7_fjrip")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=446460250]
 volume_db = -8.0
+
+[node name="LevelingAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1050267213]
+stream = ExtResource("12_fm80t")
+
+[node name="LevelUpAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=2029841942]
+stream = ExtResource("14_ugbui")
+volume_db = -20.0
+
+[node name="ButtonsAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1464709795]

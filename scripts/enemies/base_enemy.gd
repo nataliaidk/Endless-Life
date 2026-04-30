@@ -1,6 +1,8 @@
 class_name BaseEnemy
 extends CharacterBody2D
 
+signal died
+
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
 @export var blood_exp_reward := 1
 const DAMAGE_FONT: FontFile = preload("res://assets/fonts/Gothikka.ttf")
@@ -12,6 +14,13 @@ var damage := 10
 var blood_lifetime := 0.4
 var is_dead := false
 var _player_in_range: Node2D = null
+
+var xp_gem_table: Array = [
+	[XpGem.Type.NONE,   40],
+	[XpGem.Type.SMALL,  60],
+	[XpGem.Type.MEDIUM,  0],
+	[XpGem.Type.LARGE,   0],
+]
 
 # ── lifecycle ────────────────────────────────────────────────────────────────
 
@@ -27,24 +36,18 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	_update_animation(dir)
 
-# ── wirtualne metody  ───────────────────────────────────
+# ── wirtualne metody  ────────────────────────────────────────────────────────
 
-## Ustaw sprite/animacje specyficzne dla danego wroga.
 func _setup_visuals() -> void:
 	pass
 
-## Aktualizuj animację na podstawie kierunku ruchu.
 func _update_animation(_dir: Vector2) -> void:
 	pass
 
-## Dodatkowe działania przy śmierci (np. animacja die).
-func _on_death_effects() -> void:
-	queue_free()
-	
-func flash_red():
+func flash_red() -> void:
 	pass
-	
-# ── walka ─────────────────────────────────────────────────────────────────────
+
+# ── walka ────────────────────────────────────────────────────────────────────
 
 func take_damage(attack: Attack) -> void:
 	if is_dead:
@@ -66,8 +69,10 @@ func die() -> void:
 	$HurtboxArea.monitoring = false
 	$Collision.set_deferred("disabled", true)
 	$DamageTimer.stop()
+	player.add_kill()
 	_spawn_blood(blood_lifetime * 1.3, 35.0)
-	_on_death_effects()
+	_drop_xp_gems()
+	queue_free()
 
 func attack() -> void:
 	if _player_in_range == null or not is_instance_valid(_player_in_range):
@@ -76,6 +81,34 @@ func attack() -> void:
 	atk.damage   = damage
 	atk.position = global_position
 	_player_in_range.get_parent().take_damage(atk)
+
+# ── upuszczanie gemów XP ─────────────────────────────────────────────────────
+
+func _drop_xp_gems() -> void:
+	var gem_type := _roll_gem_type()
+	if gem_type == XpGem.Type.NONE:
+		return
+	_spawn_gem(gem_type)
+
+func _roll_gem_type() -> XpGem.Type:
+	var total_weight := 0
+	for entry in xp_gem_table:
+		total_weight += entry[1]
+
+	var roll := randi_range(0, total_weight - 1)
+	var cumulative := 0
+	for entry in xp_gem_table:
+		cumulative += entry[1]
+		if roll < cumulative:
+			return entry[0]
+
+	return xp_gem_table[0][0]
+
+func _spawn_gem(gem_type: XpGem.Type) -> void:
+	var gem := XpGem.new()
+	gem.gem_type = gem_type
+	gem.global_position = global_position
+	get_parent().add_child(gem)
 
 # ── sygnały hitboxa / timera ─────────────────────────────────────────────────
 
@@ -127,7 +160,7 @@ func _show_damage_number(amount: int) -> void:
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	label.add_theme_font_override("font", DAMAGE_FONT)
 	label.add_theme_font_size_override("font_size", 28)
-	label.add_theme_color_override("font_color", Color(1.0, 0.92, 0.82, 1.0))
+	label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 	label.add_theme_color_override("font_outline_color", Color(0.32, 0.0, 0.0, 1.0))
 	label.add_theme_constant_override("outline_size", 4)
 	label.top_level = true
@@ -139,7 +172,7 @@ func _show_damage_number(amount: int) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(label, "global_position", label.global_position + Vector2(0, -42), 0.55)
-	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.55)
+	tween.parallel().tween_property(label, "modulate:a", 0.0, 1.0)
 	await tween.finished
 	if is_instance_valid(label):
 		label.queue_free()

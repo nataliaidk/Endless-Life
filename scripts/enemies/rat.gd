@@ -9,6 +9,12 @@ const RAT_TEXTURES := [
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
+	xp_gem_table = [
+		[XpGem.Type.NONE,   20],
+		[XpGem.Type.SMALL,  80],
+		[XpGem.Type.MEDIUM, 0],
+		[XpGem.Type.LARGE,  0],
+	]
 	speed      = 145.0
 	max_health = 60
 	damage     = 8

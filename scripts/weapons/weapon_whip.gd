@@ -17,7 +17,7 @@ func _do_attack() -> void:
 		angle = PI
 	var slash = slash_scene.instantiate()
 	slash.damage = data.damage + _damage_bonus
-	var reach := 30.0 + _range_bonus
+	var reach := 30.0
 	slash.global_position = player.global_position + Vector2(dir, 0) * reach
 	slash.scale = Vector2.ONE * (1.0 + _range_bonus / 140.0)
 	slash.rotation = angle
