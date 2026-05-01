@@ -14,7 +14,6 @@ func _ready():
 func _on_hover():
 	audio.stream = hover_sound
 	audio.play()
-	
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game/main_menu.tscn")

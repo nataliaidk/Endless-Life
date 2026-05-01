@@ -20,7 +20,6 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	_build_ui()
 	ui_hover_audio.stream = HOVER_SOUND
-	add_child(ui_hover_audio)
 	leveling.level_up_ready.connect(_on_level_up_ready)
 	leveling.upgrade_applied.connect(_on_upgrade_applied)
 

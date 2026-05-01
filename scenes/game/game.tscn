@@ -25,6 +25,7 @@ tile_map_data = PackedByteArray("AAAAAP3/AAANAAAAAAAGAAAAAAANAAsAAAAVAP7/AQAAAAA
 tile_set = ExtResource("5_5i0tg")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=937717410]
+process_mode = 3
 stream = ExtResource("4_lfrn8")
 volume_db = -15.0
 autoplay = true

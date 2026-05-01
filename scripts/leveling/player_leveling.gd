@@ -28,7 +28,7 @@ const FALLBACK_UPGRADE := {
 @export var axe_attack_lock_time := 0.12
 
 var blood_exp := 0
-var player_level := 0
+var player_level := 1
 var unlocked_upgrade_ids: Array[String] = []
 var _weapon_damage_bonus := 0
 var _weapon_range_bonus := 0.0

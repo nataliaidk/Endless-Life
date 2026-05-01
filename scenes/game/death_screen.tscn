@@ -101,6 +101,7 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 
 [node name="Back" type="Button" parent="VBoxContainer" unique_id=1277209109]
+process_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)

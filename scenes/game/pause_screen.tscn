@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://b2teywiei3q4g"]
+
+[ext_resource type="Script" uid="uid://jnedq4p7ecox" path="res://scripts/game/pause_screen.gd" id="1_si62t"]
+[ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="2_w8b6s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywadr"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmxm4"]
+bg_color = Color(0.28118682, 0.28118688, 0.2811868, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kdd8"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hy1ln"]
+
+[node name="PauseScreen" type="CanvasLayer" unique_id=1792680621]
+process_mode = 3
+layer = 10
+script = ExtResource("1_si62t")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=28577035]
+process_mode = 3
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.7647059)
+
+[node name="PauseLabel" type="Label" parent="." unique_id=814364090]
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -86.0
+offset_right = 60.5
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_w8b6s")
+theme_override_font_sizes/font_size = 84
+text = "Pause"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=5967263]
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = 72.0
+offset_right = 87.5
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1197629690]
+process_mode = 3
+z_index = 100
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_w8b6s")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_ywadr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nmxm4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8kdd8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hy1ln")
+text = "Resume"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1625776958]
+process_mode = 3
+z_index = 100
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_w8b6s")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_ywadr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nmxm4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8kdd8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hy1ln")
+text = "Quit"
+
+[node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=361323280]
+volume_db = 5.0
+
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
