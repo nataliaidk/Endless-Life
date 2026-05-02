@@ -7,6 +7,7 @@ signal exp_gained(amount: int)
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 @onready var weapon_manager: WeaponManager = $WeaponManager
 @onready var audio = $AudioStreamPlayer
+@onready var timer: Timer = $HealTimer
 
 @export var die_sound: AudioStream
 @export var hurt_sounds: Array[AudioStream]
@@ -18,12 +19,13 @@ var is_dead := false
 var facing_direction := Vector2.DOWN
 var facing_direction_x := 1
 var is_attacking := false
+var hp_regen := 1
 
 func _ready():
 	camera.make_current()
 	health_bar.value = health
 	health_bar.max_value = max_health
-	var whip_data = load("res://data/whip_data.tres")
+	var whip_data = load("res://data/weapons/whip_data.tres")
 	weapon_manager.add_weapon(whip_data)
 	GameTimer.start()
 
@@ -71,10 +73,6 @@ func flash_red():
 	await get_tree().create_timer(0.2).timeout
 	sprite.modulate = Color(1, 1, 1) 
 
-func heal(amount: int):
-	health = min(max_health, health + amount)
-	health_bar.value = health
-
 func die():
 	GameTimer.stop()
 	audio.stream = die_sound
@@ -94,3 +92,10 @@ func gain_xp(amount: int):
 	if is_dead or amount <= 0:
 		return
 	exp_gained.emit(amount)
+
+func apply_bonus(bonus: ItemLevelData) -> void:
+	hp_regen = 1 + bonus.hp_regen
+
+func _on_heal_timer_timeout() -> void:
+	health = min(max_health, health + hp_regen)
+	health_bar.value = health

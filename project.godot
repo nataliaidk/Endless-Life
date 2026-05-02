@@ -18,6 +18,7 @@ config/icon="uid://lwbwa5xkwmhc"
 [autoload]
 
 GameTimer="*uid://cti5ikcpsrf4t"
+GameData="*uid://dn87tr2u3j40f"
 
 [display]
 

@@ -9,13 +9,30 @@
 [ext_resource type="AudioStream" uid="uid://c0g07r3qcix15" path="res://assets/sounds/male hurt 2.mp3" id="4_gx1jg"]
 [ext_resource type="Script" uid="uid://g1dq0i8rmfpm" path="res://scripts/player/weapon_manager.gd" id="5_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://bhv4aqea3wd3n" path="res://assets/sounds/male hurt 3.mp3" id="5_ugbui"]
-[ext_resource type="Script" uid="uid://b2j8l78ltt3un" path="res://scripts/leveling/player_leveling.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://b2j8l78ltt3un" path="res://scripts/leveling/leveling_manager.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://ctw5aasp0qrnv" path="res://scripts/leveling/level_up_menu.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://c6ihn5a7s3o0y" path="res://scripts/player/player_hud.gd" id="11_fm80t"]
+[ext_resource type="Script" uid="uid://c87n8phc0rbrv" path="res://scripts/weapons/item_data.gd" id="11_uf5tr"]
 [ext_resource type="AudioStream" uid="uid://bi70lqwsprl26" path="res://assets/sounds/xp_gained.mp3" id="12_fm80t"]
+[ext_resource type="Resource" uid="uid://dlq6fw6nyhjpv" path="res://data/items/live_liver_data.tres" id="12_lgqa7"]
 [ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="12_myrg7"]
+[ext_resource type="Resource" uid="uid://dkshs5g7mw6ck" path="res://data/items/steroids_data.tres" id="13_5mf0n"]
 [ext_resource type="Texture2D" uid="uid://7v62mahm2sut" path="res://assets/ui/skull.png" id="13_kvlxm"]
+[ext_resource type="Resource" uid="uid://b3ppt8dx2w51d" path="res://data/items/fire_paper_data.tres" id="14_4hvnv"]
 [ext_resource type="AudioStream" uid="uid://dsoqnkd65nv28" path="res://assets/sounds/level_up.mp3" id="14_ugbui"]
+[ext_resource type="Resource" uid="uid://cs6wsqi01y68g" path="res://data/items/holy_paper_data.tres" id="15_bbmj2"]
+[ext_resource type="Resource" uid="uid://b0ujuop6njief" path="res://data/items/beast_paper_data.tres" id="16_kxw46"]
+[ext_resource type="Resource" uid="uid://hmxpm1qgmx11" path="res://data/items/blood_paper_data.tres" id="17_8qxvo"]
+[ext_resource type="Resource" uid="uid://dbadhxn1t56mi" path="res://data/items/empty_shell_data.tres" id="18_5q8fn"]
+[ext_resource type="Resource" uid="uid://ubeej3vjyun6" path="res://data/items/hunter_bone_data.tres" id="19_wva7c"]
+[ext_resource type="Resource" uid="uid://xvu2whvkfl14" path="res://data/items/gold_pendant_data.tres" id="20_7obkq"]
+[ext_resource type="Resource" uid="uid://6ef8heodht4k" path="res://data/items/killers_hand_data.tres" id="21_vo27k"]
+[ext_resource type="Resource" uid="uid://dt5x7umbx7djh" path="res://data/items/living_heart_data.tres" id="22_genst"]
+[ext_resource type="Resource" uid="uid://bf3atp02sd3gr" path="res://data/items/lucky_clover_data.tres" id="23_niom3"]
+[ext_resource type="Resource" uid="uid://pp2af4egpi5b" path="res://data/items/pocket_watch_data.tres" id="24_ttakn"]
+[ext_resource type="Resource" uid="uid://b5mvttv5dgft1" path="res://data/items/crimson_brooch_data.tres" id="25_rw8a5"]
+[ext_resource type="Resource" uid="uid://bc7yedjrnt15p" path="res://data/items/magnetic_stone_data.tres" id="26_iwuka"]
+[ext_resource type="Resource" uid="uid://cpbupyudonk5b" path="res://data/items/bloodshot_eyeball_data.tres" id="27_hyqqp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("2_onrkg")
@@ -244,6 +261,42 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myrg7"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8627451, 0.078431375, 0.23529412, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvlxm"]
+bg_color = Color(0.0870161, 0.08701607, 0.08701607, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2936601, 0.29366007, 0.29366007, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yj68g"]
+bg_color = Color(0.08627451, 0.08627451, 0.08627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8627451, 0.078431375, 0.23529412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Player" type="CharacterBody2D" unique_id=1140903298 groups=["player"]]
 z_index = 1
 collision_layer = 8
@@ -293,8 +346,9 @@ debug_color = Color(0.1764706, 0.9098039, 0.1882353, 0.41960785)
 [node name="WeaponManager" type="Node2D" parent="." unique_id=101019310]
 script = ExtResource("5_qlg0r")
 
-[node name="PlayerLeveling" type="Node2D" parent="." unique_id=343121902]
+[node name="LevelManager" type="Node2D" parent="." unique_id=343121902]
 script = ExtResource("6_tuyoq")
+item_pool = Array[ExtResource("11_uf5tr")]([ExtResource("12_lgqa7"), ExtResource("13_5mf0n"), ExtResource("14_4hvnv"), ExtResource("15_bbmj2"), ExtResource("16_kxw46"), ExtResource("17_8qxvo"), ExtResource("18_5q8fn"), ExtResource("19_wva7c"), ExtResource("20_7obkq"), ExtResource("21_vo27k"), ExtResource("22_genst"), ExtResource("23_niom3"), ExtResource("24_ttakn"), ExtResource("25_rw8a5"), ExtResource("26_iwuka"), ExtResource("27_hyqqp")])
 
 [node name="PlayerHud" type="CanvasLayer" parent="." unique_id=70834009]
 script = ExtResource("11_fm80t")
@@ -434,7 +488,94 @@ size_flags_horizontal = 4
 texture = ExtResource("13_kvlxm")
 
 [node name="LevelUpMenu" type="CanvasLayer" parent="." unique_id=1698592873]
+process_mode = 2
+layer = 10
 script = ExtResource("7_fjrip")
+
+[node name="CenterContainer" type="CenterContainer" parent="LevelUpMenu" unique_id=1557035052]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelUpPanel" type="PanelContainer" parent="LevelUpMenu/CenterContainer" unique_id=2145726563]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_myrg7")
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelUpMenu/CenterContainer/LevelUpPanel" unique_id=14345355]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer" unique_id=1990144181]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="LevelUpLabel" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=1555092203]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 55
+text = "LEVEL UP"
+
+[node name="LevelTitle" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=1595833013]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+text = "Level 1 → 2"
+
+[node name="Spacer" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=757701550]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=1149880537]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="ChoiceButton0" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1432976281]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 240)
+layout_mode = 2
+theme_override_constants/icon_max_width = 120
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvlxm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yj68g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yj68g")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yj68g")
+
+[node name="ChoiceButton1" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1235958769]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 240)
+layout_mode = 2
+theme_override_constants/icon_max_width = 120
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvlxm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yj68g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yj68g")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yj68g")
+
+[node name="ChoiceButton2" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=363432876]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 240)
+layout_mode = 2
+theme_override_constants/icon_max_width = 120
+theme_override_fonts/font = ExtResource("12_myrg7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_kvlxm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yj68g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yj68g")
+theme_override_styles/focus = SubResource("StyleBoxFlat_yj68g")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=446460250]
 volume_db = -10.0
@@ -449,3 +590,8 @@ stream = ExtResource("14_ugbui")
 volume_db = -15.0
 
 [node name="ButtonsAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1464709795]
+
+[node name="HealTimer" type="Timer" parent="." unique_id=229005779]
+autostart = true
+
+[connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

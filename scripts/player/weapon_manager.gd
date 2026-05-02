@@ -2,9 +2,13 @@ class_name WeaponManager
 extends Node
 
 signal weapon_added(weapon_data: WeaponData)
+signal item_added(item_data: ItemData)
 
 const MAX_WEAPONS = 4
+const MAX_ITEMS = 6
+
 var active_weapons: Array[BaseWeapon] = []
+var active_items: Array[ItemData] = []
 var weapon_damage_bonus: int = 0
 var weapon_range_bonus: float = 0.0
 
@@ -13,12 +17,9 @@ var weapon_range_bonus: float = 0.0
 func add_weapon(weapon_data: WeaponData) -> bool:
 	if active_weapons.size() >= MAX_WEAPONS:
 		return false
-
 	for w in active_weapons:
 		if w.data == weapon_data:
-			_upgrade_weapon(w)
 			return true
-
 	var weapon_node = weapon_data.weapon_scene.instantiate() as BaseWeapon
 	add_child(weapon_node)
 	weapon_node.setup(weapon_data, player)
@@ -26,6 +27,14 @@ func add_weapon(weapon_data: WeaponData) -> bool:
 	active_weapons.append(weapon_node)
 	weapon_added.emit(weapon_data)
 	return true
+
+func add_item(item_data: ItemData) -> void:
+	if active_items.has(item_data):
+		return
+	if active_items.size() >= MAX_ITEMS:
+		return
+	active_items.append(item_data)
+	item_added.emit(item_data)
 
 func set_weapon_bonuses(damage_bonus: int, range_bonus: float) -> void:
 	weapon_damage_bonus = max(0, damage_bonus)
@@ -36,9 +45,6 @@ func set_weapon_bonuses(damage_bonus: int, range_bonus: float) -> void:
 func disable_all() -> void:
 	for w in active_weapons:
 		w.timer.stop()
-
-func _upgrade_weapon(weapon: BaseWeapon) -> void:
-	pass
 
 func _apply_bonuses_to_weapon(weapon: BaseWeapon) -> void:
 	if weapon != null and weapon.has_method("set_upgrade_bonuses"):

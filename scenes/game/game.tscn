@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c1nbty17pl3sx" path="res://scenes/game/enemy_spawner.tscn" id="2_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://bffw8b0x4ocv1" path="res://scenes/game/tile_map_ground_layer.tscn" id="4_5i0tg"]
 [ext_resource type="AudioStream" uid="uid://cev202yop7q8j" path="res://assets/music/Unholy Invocation.mp3" id="4_lfrn8"]
-[ext_resource type="TileSet" uid="uid://d1ngksnjd3y28" path="res://data/props_tile_set.tres" id="5_5i0tg"]
+[ext_resource type="TileSet" uid="uid://d1ngksnjd3y28" path="res://data/tilesets/props_tile_set.tres" id="5_5i0tg"]
 
 [node name="Game" type="Node2D" unique_id=1073483244]
 y_sort_enabled = true

@@ -5,7 +5,7 @@ const UI_FONT := preload("res://assets/fonts/Gothikka.ttf")
 var kills: int = 0
 
 @onready var player          = get_parent()
-@onready var leveling        = get_parent().get_node("PlayerLeveling")
+@onready var leveling        = get_parent().get_node("LevelManager")
 @onready var weapon_manager  = get_parent().get_node("WeaponManager")
 
 @onready var kills_label:      Label       = %KillsLabel
@@ -25,6 +25,7 @@ func _ready():
 	player.exp_gained.connect(_on_player_exp_gained)
 	leveling.upgrade_applied.connect(_on_upgrade_applied)
 	weapon_manager.weapon_added.connect(_on_weapon_added)
+	weapon_manager.item_added.connect(_on_item_added)
 	_refresh_exp_bar()
 
 func _process(_delta):
@@ -35,6 +36,7 @@ func _process(_delta):
 func add_kill():
 	kills += 1
 	kills_label.text = str(kills)
+	GameData.kills = kills
 
 func _on_weapon_added(weapon_data: WeaponData):
 	var index = weapon_manager.active_weapons.size() - 1
@@ -48,6 +50,19 @@ func update_weapon_slot(index: int, icon: Texture2D) -> void:
 	tex.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	tex.set_anchors_preset(Control.PRESET_FULL_RECT)
 	weapon_slots[index].add_child(tex)
+
+func _on_item_added(item_data: ItemData):
+	var index = weapon_manager.active_items.size() - 1
+	update_item_slot(index, item_data.icon)
+
+func update_item_slot(index: int, icon: Texture2D) -> void:
+	if index >= item_slots.size():
+		return
+	var tex := TextureRect.new()
+	tex.texture = icon
+	tex.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	tex.set_anchors_preset(Control.PRESET_FULL_RECT)
+	item_slots[index].add_child(tex)
 
 func _on_player_exp_gained(_amount: int):
 	_refresh_exp_bar()

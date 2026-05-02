@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dbadhxn1t56mi"]
+
+[ext_resource type="Script" uid="uid://br4dsciwujuog" path="res://scripts/weapons/item_level_data.gd" id="1_fgnly"]
+[ext_resource type="Texture2D" uid="uid://bklae034yu5g2" path="res://assets/items/empty_shell.png" id="2_6t2l6"]
+[ext_resource type="Script" uid="uid://c87n8phc0rbrv" path="res://scripts/weapons/item_data.gd" id="3_f5ila"]
+
+[sub_resource type="Resource" id="Resource_41ci7"]
+script = ExtResource("1_fgnly")
+shield = 1
+metadata/_custom_type_script = "uid://br4dsciwujuog"
+
+[sub_resource type="Resource" id="Resource_fqcf2"]
+script = ExtResource("1_fgnly")
+shield = 2
+metadata/_custom_type_script = "uid://br4dsciwujuog"
+
+[sub_resource type="Resource" id="Resource_oukbg"]
+script = ExtResource("1_fgnly")
+shield = 3
+metadata/_custom_type_script = "uid://br4dsciwujuog"
+
+[sub_resource type="Resource" id="Resource_q8q3a"]
+script = ExtResource("1_fgnly")
+shield = 4
+metadata/_custom_type_script = "uid://br4dsciwujuog"
+
+[sub_resource type="Resource" id="Resource_h3d1o"]
+script = ExtResource("1_fgnly")
+shield = 5
+metadata/_custom_type_script = "uid://br4dsciwujuog"
+
+[resource]
+script = ExtResource("3_f5ila")
+name = "Empty Shell"
+icon = ExtResource("2_6t2l6")
+bonuses = Array[ExtResource("1_fgnly")]([SubResource("Resource_41ci7"), SubResource("Resource_fqcf2"), SubResource("Resource_oukbg"), SubResource("Resource_q8q3a"), SubResource("Resource_h3d1o")])
+metadata/_custom_type_script = "uid://c87n8phc0rbrv"

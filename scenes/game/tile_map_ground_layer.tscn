@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bffw8b0x4ocv1"]
 
-[ext_resource type="TileSet" uid="uid://htm3lgyakcg7" path="res://data/ground_tile_set.tres" id="1_28xti"]
+[ext_resource type="TileSet" uid="uid://htm3lgyakcg7" path="res://data/tilesets/ground_tile_set.tres" id="1_28xti"]
 
 [node name="TileMapGroundLayer" type="TileMapLayer" unique_id=1116210779]
 z_as_relative = false

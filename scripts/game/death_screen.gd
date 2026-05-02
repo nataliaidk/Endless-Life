@@ -5,10 +5,12 @@ var hover_sound := preload("res://assets/sounds/button hover.mp3")
 @onready var audio = $AudioStreamPlayerButton
 @onready var back_button = $VBoxContainer/Back
 @onready var timer_label = $TimerLabel
+@onready var kills_label = $KillsLabel
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	timer_label.text = "Survived for %02d' %02ds" % [int(GameTimer.seconds()) / 60, int(GameTimer.seconds()) % 60]
+	kills_label.text = "Enemies killed: %d" % GameData.kills
 	back_button.mouse_entered.connect(_on_hover)
 	back_button.focus_entered.connect(_on_hover)
 	back_button.grab_focus()
