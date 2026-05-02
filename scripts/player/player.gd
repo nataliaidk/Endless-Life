@@ -18,14 +18,32 @@ var is_dead := false
 var facing_direction := Vector2.DOWN
 var facing_direction_x := 1
 var is_attacking := false
+var _gold_per_second := 1
 
 func _ready():
+	# Wait for autoloads to initialize
+	await get_tree().process_frame
+	await get_tree().process_frame  # Extra frame for autoloads
+	
+	# Verify PlayerStats is available
+	if not is_instance_valid(PlayerStats):
+		print("Warning: PlayerStats autoload not available yet")
+		return
+	
+	# Load stats from PlayerStats global
+	max_health = PlayerStats.max_health
+	health = max_health
+	
 	camera.make_current()
 	health_bar.value = health
 	health_bar.max_value = max_health
 	var whip_data = load("res://data/whip_data.tres")
 	weapon_manager.add_weapon(whip_data)
 	GameTimer.start()
+	
+	# Listen for stat changes (check if not already connected)
+	if not PlayerStats.stats_changed.is_connected(_on_stats_changed):
+		PlayerStats.stats_changed.connect(_on_stats_changed)
 
 func _physics_process(_delta):
 	if is_dead:
@@ -94,3 +112,10 @@ func gain_xp(amount: int):
 	if is_dead or amount <= 0:
 		return
 	exp_gained.emit(amount)
+
+func _on_stats_changed() -> void:
+	# Sync updated stats from PlayerStats
+	max_health = PlayerStats.max_health
+	health = min(health, max_health)
+	health_bar.max_value = max_health
+	health_bar.value = health
