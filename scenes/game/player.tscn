@@ -61,6 +61,9 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cqjlk"]
+bg_color = Color(0, 0, 0, 0.7647059)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myrg7"]
 bg_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
 border_width_left = 2
@@ -98,31 +101,51 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hvnv"]
-bg_color = Color(0.08078333, 0.08078336, 0.08078327, 1)
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbmj2"]
-bg_color = Color(0.28118682, 0.28118688, 0.2811868, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_judl8"]
+bg_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxw46"]
-bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51fhs"]
+bg_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8qxvo"]
-bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pft2h"]
+bg_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.29411766, 0.29411766, 0.29411766, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -345,39 +368,43 @@ process_mode = 2
 layer = 10
 script = ExtResource("32_qpycm")
 
-[node name="CenterContainer" type="CenterContainer" parent="LevelUpMenu" unique_id=1557035052]
+[node name="LevelUpPanel" type="PanelContainer" parent="LevelUpMenu" unique_id=411376480]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cqjlk")
 
-[node name="LevelUpPanel" type="PanelContainer" parent="LevelUpMenu/CenterContainer" unique_id=2145726563]
-unique_name_in_owner = true
+[node name="LevelUpPanel2" type="PanelContainer" parent="LevelUpMenu/LevelUpPanel" unique_id=2145726563]
 custom_minimum_size = Vector2(800, 500)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_myrg7")
 
-[node name="MarginContainer" type="MarginContainer" parent="LevelUpMenu/CenterContainer/LevelUpPanel" unique_id=14345355]
+[node name="MarginContainer" type="MarginContainer" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2" unique_id=14345355]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer" unique_id=1990144181]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer" unique_id=1990144181]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="LevelUpLabel" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=1555092203]
+[node name="LevelUpLabel" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer" unique_id=1555092203]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9411765, 0.8117647, 0.15686275, 1)
 theme_override_fonts/font = ExtResource("29_5vue8")
 theme_override_font_sizes/font_size = 55
 text = "LEVEL UP"
 
-[node name="LevelTitle" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=1595833013]
+[node name="LevelTitle" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer" unique_id=1595833013]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -385,18 +412,18 @@ theme_override_fonts/font = ExtResource("29_5vue8")
 theme_override_font_sizes/font_size = 30
 text = "Level 1 → 2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=1149880537]
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer" unique_id=1149880537]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 12
 
-[node name="Panel" type="Panel" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=689541679]
+[node name="Panel" type="Panel" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=689541679]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
 
-[node name="NameLabel1" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=1252200467]
+[node name="NameLabel1" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=1252200467]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -410,7 +437,7 @@ text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NewLabel1" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=648442817]
+[node name="NewLabel1" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=648442817]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -428,7 +455,7 @@ text = "NEW"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon1" type="TextureRect" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=374817380]
+[node name="Icon1" type="TextureRect" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=374817380]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 1
@@ -446,7 +473,7 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StatsLabel1" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=1303783768]
+[node name="StatsLabel1" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=1303783768]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -463,7 +490,7 @@ text = "DMG +10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChoiceButton1" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=1432976281]
+[node name="ChoiceButton1" type="Button" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel" unique_id=1432976281]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 1
@@ -480,12 +507,12 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_yj68g")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yj68g")
 theme_override_styles/focus = SubResource("StyleBoxFlat_yj68g")
 
-[node name="Panel2" type="Panel" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1523913851]
+[node name="Panel2" type="Panel" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1523913851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
 
-[node name="NameLabel2" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1286130620]
+[node name="NameLabel2" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1286130620]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -499,7 +526,7 @@ text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NewLabel2" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1965056863]
+[node name="NewLabel2" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1965056863]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -517,7 +544,7 @@ text = "NEW"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon2" type="TextureRect" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=333768430]
+[node name="Icon2" type="TextureRect" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=333768430]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 1
@@ -535,7 +562,7 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StatsLabel2" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1609630519]
+[node name="StatsLabel2" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1609630519]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -552,7 +579,7 @@ text = "DMG +10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChoiceButton2" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1235958769]
+[node name="ChoiceButton2" type="Button" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel2" unique_id=1235958769]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 1
@@ -569,12 +596,12 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_yj68g")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yj68g")
 theme_override_styles/focus = SubResource("StyleBoxFlat_yj68g")
 
-[node name="Panel3" type="Panel" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=616796851]
+[node name="Panel3" type="Panel" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=616796851]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 2
 
-[node name="NameLabel3" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=1878146112]
+[node name="NameLabel3" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=1878146112]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
@@ -588,7 +615,7 @@ text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NewLabel3" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=261622886]
+[node name="NewLabel3" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=261622886]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -606,7 +633,7 @@ text = "NEW"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon3" type="TextureRect" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=1323389060]
+[node name="Icon3" type="TextureRect" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=1323389060]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 1
@@ -624,7 +651,7 @@ grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StatsLabel3" type="Label" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=1262898516]
+[node name="StatsLabel3" type="Label" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=1262898516]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12
@@ -641,7 +668,7 @@ text = "DMG +10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChoiceButton3" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=363432876]
+[node name="ChoiceButton3" type="Button" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/HBoxContainer/Panel3" unique_id=363432876]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 1
@@ -658,7 +685,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_yj68g")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yj68g")
 theme_override_styles/focus = SubResource("StyleBoxFlat_yj68g")
 
-[node name="PassButton" type="Button" parent="LevelUpMenu/CenterContainer/LevelUpPanel/MarginContainer/VBoxContainer" unique_id=711279022]
+[node name="PassButton" type="Button" parent="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer" unique_id=711279022]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
@@ -670,12 +697,12 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("29_5vue8")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_4hvnv")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bbmj2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kxw46")
-theme_override_styles/focus = SubResource("StyleBoxFlat_8qxvo")
-text = "Pass"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_judl8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_51fhs")
+theme_override_styles/focus = SubResource("StyleBoxFlat_pft2h")
+text = "PASS"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=446460250]
 volume_db = -10.0

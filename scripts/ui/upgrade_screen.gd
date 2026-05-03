@@ -41,12 +41,23 @@ func _update_ui() -> void:
 	health_label.text = "HP: %d" % [SaveManager.get_stat(i, "max_health", h.max_health)]
 	speed_label.text = "SPEED: %d" % [SaveManager.get_stat(i, "speed", h.speed)]
 	luck_label.text = "LUCK: %d" % [SaveManager.get_stat(i, "luck", h.luck)]
-	health_button.disabled = SaveManager.gold < UPGRADE_COST or SaveManager.get_level(i, "max_health") >= 10
-	speed_button.disabled = SaveManager.gold < UPGRADE_COST or SaveManager.get_level(i, "speed") >= 10
-	luck_button.disabled = SaveManager.gold < UPGRADE_COST or SaveManager.get_level(i, "luck") >= 10
-	draw_segments(health_segments, SaveManager.get_level(0, "max_health"))
-	draw_segments(speed_segments, SaveManager.get_level(0, "speed"))
-	draw_segments(luck_segments, SaveManager.get_level(0, "luck"))
+	
+	if SaveManager.gold < UPGRADE_COST:
+		health_button.disabled = true
+		if SaveManager.get_level(i, "max_health") >= 10:
+			health_button.text = "MAX"
+	if SaveManager.gold < UPGRADE_COST:
+		speed_button.disabled = true
+		if SaveManager.get_level(i, "speed") >= 10:
+			speed_button.text = "MAX"
+	if SaveManager.gold < UPGRADE_COST:
+		luck_button.disabled = true
+		if SaveManager.get_level(i, "luck") >= 10:
+			luck_button.text = "MAX"
+		
+	draw_segments(health_segments, SaveManager.get_level(0, "max_health"), Color(1.0, 0.0, 0.0))
+	draw_segments(speed_segments, SaveManager.get_level(0, "speed"),Color(0.0, 0.0, 1.0))
+	draw_segments(luck_segments, SaveManager.get_level(0, "luck"), Color(0.0, 1.0, 0.0))
 
 func _on_upgrade_health() -> void:
 	SaveManager.upgrade_hero_stat(SaveManager.selected_hero_index, "max_health", UPGRADE_COST)
@@ -64,12 +75,20 @@ func _on_hover() -> void:
 	audio.stream = hover_sound
 	audio.play()
 
-func draw_segments(container: HBoxContainer, level: int, max_level: int = 10) -> void:
+func draw_segments(container: HBoxContainer, level: int, active_color: Color) -> void:
 	for child in container.get_children():
 		child.queue_free()
 	
-	for i in max_level:
-		var segment = ColorRect.new()
+	for i in 10:
+		var segment = Panel.new()
 		segment.custom_minimum_size = Vector2(8, 8)
-		segment.color = Color(0.6, 0.1, 0.1) if i < level else Color(0.2, 0.2, 0.2)
+		
+		var style = StyleBoxFlat.new()
+		style.bg_color = active_color if i < level else Color(0.2, 0.2, 0.2)
+		style.corner_radius_top_left = 2
+		style.corner_radius_top_right = 2
+		style.corner_radius_bottom_left = 2
+		style.corner_radius_bottom_right = 2
+		
+		segment.add_theme_stylebox_override("panel", style)
 		container.add_child(segment)
