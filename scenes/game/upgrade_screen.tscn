@@ -1,36 +1,62 @@
 [gd_scene format=3 uid="uid://dlc8ifst8c0ho"]
 
-[ext_resource type="Script" path="res://scripts/game/upgrade_screen.gd" id="1_h6b3j"]
+[ext_resource type="Script" uid="uid://coq2hwqoc8614" path="res://scripts/game/upgrade_screen.gd" id="1_h6b3j"]
 [ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="2_1fj2j"]
+[ext_resource type="Texture2D" uid="uid://v55uu8f17qxi" path="res://assets/ui/graveyard.png" id="2_27eun"]
 [ext_resource type="AudioStream" uid="uid://cakebb2phefj6" path="res://assets/music/Moonlit Melody.mp3" id="3_1fj2j"]
-[ext_resource type="Texture2D" path="res://assets/sprites/Blood_Hunter.png" id="4_hunter"]
+[ext_resource type="Texture2D" uid="uid://c06ai48b76d8i" path="res://assets/ui/coin.png" id="4_v3unh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hunter_preview"]
-atlas = ExtResource("4_hunter")
-region = Rect2(0, 822, 218, 274)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0mgnl"]
+texture = ExtResource("2_27eun")
+modulate_color = Color(0.47788018, 0.47788012, 0.47788012, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
-bg_color = Color(0.08, 0.08, 0.08, 0.92)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tv0if"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2wp6"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhk7m"]
+bg_color = Color(0.08078333, 0.08078336, 0.08078327, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3"]
-bg_color = Color(0.12, 0.12, 0.12, 1)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkeid"]
+bg_color = Color(0.28118682, 0.28118688, 0.2811868, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
 
-[node name="UpgradeScreen" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bajly"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c835b"]
+bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+
+[node name="UpgradeScreen" type="Control" unique_id=960098450]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,149 +65,193 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h6b3j")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=691877742]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.04, 0.04, 0.08, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_0mgnl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1865480506]
+custom_minimum_size = Vector2(250, 700)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -277.5
+offset_right = 150.0
+offset_bottom = 277.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 18
-offset_left = 42.0
-offset_top = 34.0
-offset_right = -42.0
-offset_bottom = -34.0
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=969885505]
+custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 48
-text = "Character Upgrades"
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_tv0if")
+text = "Upgrade Characters"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Content" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=2093451613]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 24
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_bottom = 30
 
-[node name="StatsPanel" type="PanelContainer" parent="VBoxContainer/Content"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1813502609]
 layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer" unique_id=1509315739]
+custom_minimum_size = Vector2(300, 500)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f2wp6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel" unique_id=115613840]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 300.0
+offset_bottom = 68.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_1")
 
-[node name="StatsBox" type="VBoxContainer" parent="VBoxContainer/Content/StatsPanel"]
+[node name="NameLabel1" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=1972097373]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_constants/separation = 18
-offset_left = 22.0
-offset_top = 22.0
-offset_right = -22.0
-offset_bottom = -22.0
-
-[node name="GoldLabel" type="Label" parent="VBoxContainer/Content/StatsPanel/StatsBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 0.22, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 36
-text = "Gold: 200"
+theme_override_font_sizes/font_size = 30
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="InfoLabel" type="Label" parent="VBoxContainer/Content/StatsPanel/StatsBox"]
+[node name="Icon1" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=1804256509]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.92, 0.88, 0.82, 1)
-theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 22
-text = "Upgrade the hunter between runs."
+stretch_mode = 5
 
-[node name="HealthRow" type="HBoxContainer" parent="VBoxContainer/Content/StatsPanel/StatsBox"]
+[node name="Spacer" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=460577099]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_constants/separation = 16
 
-[node name="HealthLabel" type="Label" parent="VBoxContainer/Content/StatsPanel/StatsBox/HealthRow"]
+[node name="StatsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=432125707]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 0.35, 0.35, 1)
-theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 32
-text = "HP: 100"
 
-[node name="UpgradeHealthBtn" type="Button" parent="VBoxContainer/Content/StatsPanel/StatsBox/HealthRow"]
+[node name="HealthContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer" unique_id=1238700684]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_2")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
-text = "Upgrade +10 HP / 50 gold"
+alignment = 1
 
-[node name="DamageRow" type="HBoxContainer" parent="VBoxContainer/Content/StatsPanel/StatsBox"]
+[node name="HealthLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/HealthContainer" unique_id=1217726772]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="DamageLabel" type="Label" parent="VBoxContainer/Content/StatsPanel/StatsBox/DamageRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 0.35, 0.35, 1)
-theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 32
-text = "DMG: 10"
-
-[node name="UpgradeDamageBtn" type="Button" parent="VBoxContainer/Content/StatsPanel/StatsBox/DamageRow"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_1fj2j")
-theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxFlat_2")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
-text = "Upgrade +5 DMG / 50 gold"
-
-[node name="BackButton" type="Button" parent="VBoxContainer/Content/StatsPanel/StatsBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_2")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_3")
-text = "Back to Menu"
+text = "HP"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PreviewPanel" type="PanelContainer" parent="VBoxContainer/Content"]
+[node name="HealthSegments" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/HealthContainer" unique_id=109868765]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_1")
 
-[node name="PreviewBox" type="VBoxContainer" parent="VBoxContainer/Content/PreviewPanel"]
+[node name="HealthButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/HealthContainer" unique_id=1224968939]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 12
-offset_left = 22.0
-offset_top = 22.0
-offset_right = -22.0
-offset_bottom = -22.0
 
-[node name="PreviewLabel" type="Label" parent="VBoxContainer/Content/PreviewPanel/PreviewBox"]
+[node name="SpeedContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer" unique_id=1632630711]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+alignment = 1
+
+[node name="SpeedLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/SpeedContainer" unique_id=885182755]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
 theme_override_font_sizes/font_size = 28
-text = "Hunter"
+text = "SPEED"
+vertical_alignment = 1
 
-[node name="CharacterPreview" type="TextureRect" parent="VBoxContainer/Content/PreviewPanel/PreviewBox"]
+[node name="SpeedSegments" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/SpeedContainer" unique_id=650137384]
+unique_name_in_owner = true
 layout_mode = 2
-custom_minimum_size = Vector2(360, 360)
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = SubResource("AtlasTexture_hunter_preview")
-stretch_mode = 6
 
-[node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="."]
+[node name="SpeedButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/SpeedContainer" unique_id=1690660814]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LuckContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer" unique_id=1792093966]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LuckLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/LuckContainer" unique_id=634204156]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_1fj2j")
+theme_override_font_sizes/font_size = 28
+text = "LUCK"
+vertical_alignment = 1
+
+[node name="LuckSegments" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/LuckContainer" unique_id=1348055564]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LuckButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/LuckContainer" unique_id=1113331698]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Back" type="Button" parent="VBoxContainer" unique_id=229645908]
+custom_minimum_size = Vector2(266, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_1fj2j")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vhk7m")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pkeid")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bajly")
+theme_override_styles/focus = SubResource("StyleBoxFlat_c835b")
+text = "Back"
+
+[node name="GoldContainer" type="HBoxContainer" parent="." unique_id=45345730]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 1387.0
+offset_top = 749.0
+offset_right = 1487.0
+offset_bottom = 789.0
+alignment = 2
+
+[node name="GoldLabel" type="Label" parent="GoldContainer" unique_id=161459182]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8117647, 0.11372549, 1)
+theme_override_fonts/font = ExtResource("2_1fj2j")
+theme_override_font_sizes/font_size = 30
+text = "0"
+vertical_alignment = 1
+
+[node name="Coin" type="TextureRect" parent="GoldContainer" unique_id=243253279]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+texture = ExtResource("4_v3unh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=1884410788]
 stream = ExtResource("3_1fj2j")
 volume_db = -80.0

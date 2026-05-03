@@ -8,6 +8,7 @@ var hover_sound := preload("res://assets/sounds/button hover.mp3")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	MusicPlayer.stop_music()
 	resume_button.mouse_entered.connect(_on_hover)
 	quit_button.mouse_entered.connect(_on_hover)
 	resume_button.focus_entered.connect(_on_hover)
@@ -32,4 +33,5 @@ func _input(event: InputEvent) -> void:
 func _on_resume_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
+	MusicPlayer.resume()
 	queue_free()

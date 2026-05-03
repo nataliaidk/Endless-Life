@@ -7,7 +7,6 @@
 [resource]
 script = ExtResource("2_mfcgi")
 name = "Whip"
-damage = 35
 icon = ExtResource("1_1f4gc")
 weapon_scene = ExtResource("3_bptgk")
 metadata/_custom_type_script = "uid://hp4souuetdmb"

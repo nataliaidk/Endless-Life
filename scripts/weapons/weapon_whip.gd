@@ -16,8 +16,7 @@ func _do_attack() -> void:
 	if dir < 0:
 		angle = PI
 	var slash = slash_scene.instantiate()
-	# Total damage: weapon base + level bonuses + player stats upgrades
-	slash.damage = data.damage + _damage_bonus + (PlayerStats.damage - 10)
+	slash.damage = data.damage + _damage_bonus
 	var reach := 30.0
 	slash.global_position = player.global_position + Vector2(dir, 0) * reach
 	slash.scale = Vector2.ONE * (1.0 + _range_bonus / 140.0)

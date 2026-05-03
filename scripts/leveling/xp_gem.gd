@@ -4,9 +4,9 @@ extends Area2D
 enum Type { NONE, SMALL, MEDIUM, LARGE }
 
 const CONFIG := {
-	Type.SMALL:  { "value": 3,  "color": Color(0.4, 0.0, 0.04), "radius": 5.0,  "label": "small"  },
-	Type.MEDIUM: { "value": 5,  "color": Color(1.0, 0.0, 0.0), "radius": 5.0,  "label": "medium" },
-	Type.LARGE:  { "value": 20, "color": Color(0.96, 0.96, 0.94), "radius": 5.0,  "label": "large"  },
+	Type.SMALL:  { "value": 1,  "color": Color(1.0, 0.0, 0.0), "radius": 5.0,  "label": "small"  },
+	Type.MEDIUM: { "value": 10,  "color": Color(1.0, 0.886, 0.11, 1.0), "radius": 5.0,  "label": "medium" },
+	Type.LARGE:  { "value": 50, "color": Color(0.96, 0.96, 0.94), "radius": 5.0,  "label": "large"  },
 }
 
 @export var gem_type: Type = Type.SMALL

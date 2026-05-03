@@ -3,11 +3,13 @@ extends CanvasLayer
 const UI_FONT := preload("res://assets/fonts/Gothikka.ttf")
 
 var kills: int = 0
+var gold: int = 0
 
 @onready var player          = get_parent()
 @onready var leveling        = get_parent().get_node("LevelManager")
 @onready var weapon_manager  = get_parent().get_node("WeaponManager")
 
+@onready var gold_label:       Label       = %GoldLabel
 @onready var kills_label:      Label       = %KillsLabel
 @onready var exp_progress_bar: ProgressBar = %ExpBar
 @onready var time_label:       Label       = %TimeLabel
@@ -66,6 +68,11 @@ func update_item_slot(index: int, icon: Texture2D) -> void:
 
 func _on_player_exp_gained(_amount: int):
 	_refresh_exp_bar()
+
+func _on_player_gold_gained(_amount: int):
+	gold += _amount
+	gold_label.text = str(gold)
+	GameData.gold = gold
 
 func _on_upgrade_applied(_upgrade: Dictionary):
 	_refresh_exp_bar()

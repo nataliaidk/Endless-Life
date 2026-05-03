@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dcrooow8f1i2h" path="res://scripts/game/death_screen.gd" id="1_gbdnc"]
 [ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="2_gf2gt"]
+[ext_resource type="Texture2D" uid="uid://7v62mahm2sut" path="res://assets/ui/skull.png" id="3_aae5y"]
 [ext_resource type="AudioStream" uid="uid://cy54opqcn65xb" path="res://assets/sounds/You Died.mp3" id="3_gf2gt"]
+[ext_resource type="Texture2D" uid="uid://c06ai48b76d8i" path="res://assets/ui/coin.png" id="3_nt8uq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7egq5"]
 bg_color = Color(0.08078333, 0.08078336, 0.08078327, 1)
@@ -63,10 +65,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -90.5
-offset_top = -127.0
-offset_right = 90.5
-offset_bottom = -42.0
+offset_left = -107.5
+offset_top = -102.0
+offset_right = 107.5
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.8627451, 0.078431375, 0.23529412, 1)
@@ -76,39 +78,64 @@ theme_override_fonts/font = ExtResource("2_gf2gt")
 theme_override_font_sizes/font_size = 100
 text = "You Died"
 
-[node name="TimerLabel" type="Label" parent="." unique_id=1941185455]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=875467169]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -15.0
-offset_right = 50.0
-offset_bottom = 16.0
+offset_left = -148.5
+offset_top = -32.0
+offset_right = 148.5
+offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_gf2gt")
-theme_override_font_sizes/font_size = 30
-text = "Survived for"
+theme_override_constants/separation = 50
+alignment = 1
 
-[node name="KillsLabel" type="Label" parent="." unique_id=272700539]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = 22.0
-offset_right = 62.0
-offset_bottom = 53.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TimerLabel" type="Label" parent="HBoxContainer" unique_id=1941185455]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gf2gt")
 theme_override_font_sizes/font_size = 30
-text = "Enemies killed: "
+text = "0:00"
+horizontal_alignment = 1
+
+[node name="KillsContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=521865928]
+layout_mode = 2
+alignment = 1
+
+[node name="KillsLabel" type="Label" parent="HBoxContainer/KillsContainer" unique_id=272700539]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gf2gt")
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+
+[node name="Skull" type="TextureRect" parent="HBoxContainer/KillsContainer" unique_id=1421543662]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = ExtResource("3_aae5y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1448153032]
+layout_mode = 2
+alignment = 1
+
+[node name="GoldLabel" type="Label" parent="HBoxContainer/GoldContainer" unique_id=1568908359]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8117647, 0.11372549, 1)
+theme_override_fonts/font = ExtResource("2_gf2gt")
+theme_override_font_sizes/font_size = 30
+text = "+ 0"
+
+[node name="Coin" type="TextureRect" parent="HBoxContainer/GoldContainer" unique_id=1541808423]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+texture = ExtResource("3_nt8uq")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1403688716]
 layout_mode = 1
@@ -118,9 +145,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -87.5
-offset_top = 116.0
+offset_top = 132.0
 offset_right = 87.5
-offset_bottom = 173.0
+offset_bottom = 189.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16

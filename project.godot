@@ -19,7 +19,8 @@ config/icon="uid://lwbwa5xkwmhc"
 
 GameTimer="*uid://cti5ikcpsrf4t"
 GameData="*uid://dn87tr2u3j40f"
-PlayerStats="*res://scripts/game/player_stats.gd"
+SaveManager="*res://scripts/game/save_manager.gd"
+MusicPlayer="*uid://dfndkdj51mx38"
 
 [display]
 

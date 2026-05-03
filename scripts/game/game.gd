@@ -9,9 +9,10 @@ const TRACKS = [
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	$AudioStreamPlayer.stream = TRACKS.pick_random()
-	$AudioStreamPlayer.play()
+	MusicPlayer.set_volume(0.2)
+	MusicPlayer.play_music(TRACKS.pick_random())
 	GameData.kills = 0
+	GameData.gold = 0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not get_tree().paused:

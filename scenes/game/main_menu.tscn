@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://ctaqj6bbksdw4" path="res://scripts/game/main_menu.gd" id="1_3r4tm"]
 [ext_resource type="Texture2D" uid="uid://v55uu8f17qxi" path="res://assets/ui/graveyard.png" id="1_ngy02"]
 [ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="2_e66b0"]
-[ext_resource type="AudioStream" uid="uid://cakebb2phefj6" path="res://assets/music/Moonlit Melody.mp3" id="3_e66b0"]
+[ext_resource type="Texture2D" uid="uid://dlo8s1ykl0lum" path="res://assets/ui/crown.png" id="4_gfgjs"]
+[ext_resource type="Texture2D" uid="uid://7v62mahm2sut" path="res://assets/ui/skull.png" id="5_fpthd"]
+[ext_resource type="Texture2D" uid="uid://c06ai48b76d8i" path="res://assets/ui/coin.png" id="6_fpthd"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gfgjs"]
 texture = ExtResource("1_ngy02")
@@ -41,14 +43,6 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfgjs"]
-bg_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_size = 5
-
 [node name="MainMenu" type="Control" unique_id=1149567354]
 layout_mode = 3
 anchors_preset = 15
@@ -67,7 +61,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_gfgjs")
 
-[node name="PrimaryVBox" type="VBoxContainer" parent="." unique_id=2123456701]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2123456701]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,7 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="NewGame" type="Button" parent="PrimaryVBox" unique_id=2123456702]
+[node name="StartGame" type="Button" parent="VBoxContainer" unique_id=2123456702]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -96,9 +90,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
 theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
-text = "New Game"
+text = "Start Game"
 
-[node name="LoadPrimary" type="Button" parent="PrimaryVBox" unique_id=2123456703]
+[node name="Upgrade" type="Button" parent="VBoxContainer" unique_id=2123456703]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -112,9 +106,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
 theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
-text = "Load"
+text = "Upgrades"
 
-[node name="ExitPrimary" type="Button" parent="PrimaryVBox" unique_id=2123456704]
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=2123456704]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -129,86 +123,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
 theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
 text = "Exit"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=479425433]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = 17.0
-offset_right = 136.0
-offset_bottom = 214.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 16
-
-[node name="Start" type="Button" parent="VBoxContainer" unique_id=763084690]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_e66b0")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
-theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
-theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
-text = "Start game"
-
-[node name="Upgrade" type="Button" parent="VBoxContainer" unique_id=1234567890]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_e66b0")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
-theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
-theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
-text = "Upgrade"
-
-[node name="Save" type="Button" parent="VBoxContainer" unique_id=1234567892]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_e66b0")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
-theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
-theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
-text = "Save"
-
-[node name="Exit" type="Button" parent="VBoxContainer" unique_id=1381819829]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_e66b0")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_fpthd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bto60")
-theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
-theme_override_styles/focus = SubResource("StyleBoxFlat_gfgjs")
-text = "Exit
-"
 
 [node name="Label" type="Label" parent="." unique_id=614091664]
 layout_mode = 1
@@ -230,18 +144,75 @@ theme_override_fonts/font = ExtResource("2_e66b0")
 theme_override_font_sizes/font_size = 89
 text = "Endless Blood"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=915351324]
-stream = ExtResource("3_e66b0")
-volume_db = 6.0
-autoplay = true
-
 [node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=1176650924]
 volume_db = 5.0
 
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[node name="BestScoreContainer" type="VBoxContainer" parent="." unique_id=788239337]
+layout_mode = 0
+offset_left = 1410.0
+offset_top = 7.0
+offset_right = 1490.0
+offset_bottom = 117.0
+alignment = 1
+
+[node name="Crown" type="TextureRect" parent="BestScoreContainer" unique_id=754388559]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("4_gfgjs")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TimeLabel" type="Label" parent="BestScoreContainer" unique_id=2039511989]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_e66b0")
+theme_override_font_sizes/font_size = 30
+text = "0:00"
+horizontal_alignment = 1
+
+[node name="KillsContainer" type="HBoxContainer" parent="BestScoreContainer" unique_id=19349756]
+layout_mode = 2
+alignment = 1
+
+[node name="KillsLabel" type="Label" parent="BestScoreContainer/KillsContainer" unique_id=1131861886]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_e66b0")
+theme_override_font_sizes/font_size = 30
+text = "0"
+
+[node name="Skull" type="TextureRect" parent="BestScoreContainer/KillsContainer" unique_id=1211269742]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+texture = ExtResource("5_fpthd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldContainer" type="HBoxContainer" parent="." unique_id=1259959261]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 1387.0
+offset_top = 749.0
+offset_right = 1487.0
+offset_bottom = 789.0
+alignment = 2
+
+[node name="GoldLabel" type="Label" parent="GoldContainer" unique_id=1603538700]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9607843, 0.8117647, 0.11372549, 1)
+theme_override_fonts/font = ExtResource("2_e66b0")
+theme_override_font_sizes/font_size = 30
+text = "0"
+vertical_alignment = 1
+
+[node name="Coin" type="TextureRect" parent="GoldContainer" unique_id=327769168]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+texture = ExtResource("6_fpthd")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="PrimaryVBox/NewGame" to="." method="_on_newgame_pressed"]
-[connection signal="pressed" from="PrimaryVBox/LoadPrimary" to="." method="_on_load_pressed"]
-[connection signal="pressed" from="PrimaryVBox/ExitPrimary" to="." method="_on_exit_pressed"]
