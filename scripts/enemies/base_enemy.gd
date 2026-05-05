@@ -73,10 +73,11 @@ func take_damage(attack: Attack) -> void:
 	_spawn_blood(blood_lifetime * 0.8, 16.0)
 	flash_red()
 	
-	# Apply knockback
-	var knockback_dir := global_position.direction_to(attack.position).normalized()
-	knockback_velocity = knockback_dir * knockback_speed
-	knockback_duration = 0.2
+	# Apply knockback - push enemy AWAY from player
+	if is_instance_valid(player):
+		var knockback_dir := (global_position - player.global_position).normalized()
+		knockback_velocity = knockback_dir * knockback_speed
+		knockback_duration = 0.2
 	
 	if health <= 0:
 		die()
@@ -166,7 +167,7 @@ func _spawn_blood(lifetime: float, vel_min: float) -> void:
 	p.scale_amount_max     = 1.8
 	p.color                = Color(0.73, 0.05, 0.08, 0.85)
 	p.local_coords         = false
-	p.z_index              = 20
+	p.z_index              = 0
 	p.global_position      = global_position
 	get_parent().add_child(p)
 	p.emitting = true
@@ -178,6 +179,7 @@ func _spawn_blood_decal() -> void:
 	var decal := Node2D.new()
 	decal.global_position = global_position
 	decal.rotation = randf_range(0, TAU)
+	decal.z_index = 0
 	
 	var sprite := Sprite2D.new()
 	sprite.centered = true
@@ -189,7 +191,7 @@ func _spawn_blood_decal() -> void:
 	
 	sprite.texture = atlas
 	sprite.scale = Vector2.ONE * randf_range(0.7, 1.2)
-	sprite.z_index = 5
+	sprite.z_index = 0
 	sprite.modulate.a = 0.8
 	
 	decal.add_child(sprite)
