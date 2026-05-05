@@ -15,6 +15,7 @@ extends Control
 @onready var luck_segments: Container = %LuckSegments
 @onready var hover_sound = preload("res://assets/sounds/button hover.mp3")
 @onready var audio = $AudioStreamPlayerButton
+@onready var money_audio = $AudioPlayerMoneyButton
 
 const UPGRADE_COST = 50
 
@@ -44,28 +45,34 @@ func _update_ui() -> void:
 	
 	if SaveManager.gold < UPGRADE_COST:
 		health_button.disabled = true
-		if SaveManager.get_level(i, "max_health") >= 10:
-			health_button.text = "MAX"
+	if SaveManager.get_level(i, "max_health") >= 10:
+		health_button.disabled = true
+		health_button.text = "MAX"
 	if SaveManager.gold < UPGRADE_COST:
 		speed_button.disabled = true
-		if SaveManager.get_level(i, "speed") >= 10:
-			speed_button.text = "MAX"
+	if SaveManager.get_level(i, "speed") >= 10:
+		speed_button.disabled = true
+		speed_button.text = "MAX"
 	if SaveManager.gold < UPGRADE_COST:
 		luck_button.disabled = true
-		if SaveManager.get_level(i, "luck") >= 10:
-			luck_button.text = "MAX"
+	if SaveManager.get_level(i, "luck") >= 10:
+		luck_button.disabled = true
+		luck_button.text = "MAX"
 		
 	draw_segments(health_segments, SaveManager.get_level(0, "max_health"), Color(1.0, 0.0, 0.0))
 	draw_segments(speed_segments, SaveManager.get_level(0, "speed"),Color(0.0, 0.0, 1.0))
 	draw_segments(luck_segments, SaveManager.get_level(0, "luck"), Color(0.0, 1.0, 0.0))
 
 func _on_upgrade_health() -> void:
+	money_audio.play()
 	SaveManager.upgrade_hero_stat(SaveManager.selected_hero_index, "max_health", UPGRADE_COST)
 
 func _on_upgrade_speed() -> void:
+	money_audio.play()
 	SaveManager.upgrade_hero_stat(SaveManager.selected_hero_index, "speed", UPGRADE_COST)
 
 func _on_upgrade_luck() -> void:
+	money_audio.play()
 	SaveManager.upgrade_hero_stat(SaveManager.selected_hero_index, "luck", UPGRADE_COST)
 
 func _on_back_pressed() -> void:

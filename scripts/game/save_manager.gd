@@ -43,10 +43,11 @@ func upgrade_hero_stat(hero_index: int, stat: String, cost: int) -> bool:
 	if gold < cost:
 		return false
 	var level_key = stat + "_level"
-	if heroes[hero_index].get(level_key, 0) >= 10:
+	var current_level = heroes[hero_index].get(level_key, 0)
+	if current_level >= 10:
 		return false
 	gold -= cost
-	heroes[hero_index][level_key] += 1
+	heroes[hero_index][level_key] = current_level + 1
 	stats_changed.emit()
 	gold_changed.emit()
 	save_game()

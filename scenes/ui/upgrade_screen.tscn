@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://v55uu8f17qxi" path="res://assets/ui/graveyard.png" id="2_27eun"]
 [ext_resource type="AudioStream" uid="uid://cakebb2phefj6" path="res://assets/music/Moonlit Melody.mp3" id="3_1fj2j"]
 [ext_resource type="Texture2D" uid="uid://c06ai48b76d8i" path="res://assets/ui/coin.png" id="4_v3unh"]
+[ext_resource type="AudioStream" uid="uid://ddo1whfgabobt" path="res://assets/sounds/money.mp3" id="6_to70l"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0mgnl"]
 texture = ExtResource("2_27eun")
@@ -293,7 +294,7 @@ alignment = 1
 
 [node name="HealthLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/HealthContainer" unique_id=1217726772]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 40)
+custom_minimum_size = Vector2(85, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
@@ -314,6 +315,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_k541j")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_giv8v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5glte")
@@ -340,7 +342,7 @@ alignment = 1
 
 [node name="SpeedLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/SpeedContainer" unique_id=885182755]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 40)
+custom_minimum_size = Vector2(85, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
@@ -361,6 +363,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_k541j")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_se0nm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_g4jv7")
@@ -387,7 +390,7 @@ alignment = 1
 
 [node name="LuckLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/StatsContainer/LuckContainer" unique_id=634204156]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 40)
+custom_minimum_size = Vector2(85, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("2_1fj2j")
@@ -408,6 +411,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_k541j")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ygxdb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_shjbj")
@@ -472,3 +476,7 @@ stretch_mode = 5
 [node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=1884410788]
 stream = ExtResource("3_1fj2j")
 volume_db = -80.0
+
+[node name="AudioPlayerMoneyButton" type="AudioStreamPlayer" parent="." unique_id=55904440]
+stream = ExtResource("6_to70l")
+volume_db = -15.0
