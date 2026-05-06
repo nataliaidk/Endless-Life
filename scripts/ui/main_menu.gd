@@ -24,6 +24,7 @@ func _ready():
 	upgrade_button.focus_neighbor_bottom = exit_button.get_path()
 	exit_button.focus_neighbor_top = upgrade_button.get_path()
 	start_button.grab_focus()
+	#SaveManager.reset_save()
 	
 	kills_label.text = str(SaveManager.best_kills)
 	time_label.text = "%02d:%02d" % [int(SaveManager.best_time) / 60, int(SaveManager.best_time) % 60]
