@@ -5,13 +5,14 @@ extends BaseEnemy
 func _ready() -> void:
 	xp_gem_table = [
 		[XpGem.Type.NONE,   0],
-		[XpGem.Type.SMALL,  90],
-		[XpGem.Type.MEDIUM, 10],
+		[XpGem.Type.SMALL,  99],
+		[XpGem.Type.MEDIUM, 1],
 		[XpGem.Type.LARGE,  0],
 	]
-	speed      = 75.0
-	max_health = 25
-	damage     = 10
+	speed       = 75.0
+	max_health  = 25
+	damage      = 10
+	blood_scale = 0.9
 	super()
 
 func _update_animation(dir: Vector2) -> void:

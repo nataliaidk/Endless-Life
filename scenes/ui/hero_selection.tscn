@@ -132,7 +132,7 @@ offset_right = 300.0
 offset_bottom = 68.0
 size_flags_horizontal = 3
 
-[node name="NameLabel1" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=52420009]
+[node name="NameLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=52420009]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -142,7 +142,7 @@ text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon1" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=1982326944]
+[node name="HeroIcon" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer" unique_id=1982326944]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 275)
 layout_mode = 2
@@ -153,18 +153,18 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="StatLabel11" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=105524968]
+[node name="HealthLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=105524968]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6392157, 0.2784314, 0.2784314, 1)
 theme_override_fonts/font = ExtResource("2_s0o87")
 theme_override_font_sizes/font_size = 28
-text = "HP"
+text = "HEALTH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StatLabel12" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=646093620]
+[node name="SpeedLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=646093620]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2901961, 0.49803922, 0.70980394, 1)
@@ -172,7 +172,7 @@ theme_override_fonts/font = ExtResource("2_s0o87")
 theme_override_font_sizes/font_size = 28
 text = "SPEED"
 
-[node name="StatLabel13" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=306086553]
+[node name="LuckLabel" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel/VBoxContainer/HBoxContainer" unique_id=306086553]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.24705882, 0.6431373, 0.41568628, 1)
@@ -180,7 +180,7 @@ theme_override_fonts/font = ExtResource("2_s0o87")
 theme_override_font_sizes/font_size = 28
 text = "LUCK"
 
-[node name="StartButton1" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel" unique_id=364116178]
+[node name="StartButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Panel" unique_id=364116178]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -193,7 +193,8 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_kj2mt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kj2mt")
 theme_override_styles/focus = SubResource("StyleBoxFlat_kj2mt")
 
-[node name="Back" type="Button" parent="VBoxContainer" unique_id=918590885]
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=918590885]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(266, 40)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -210,8 +211,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mbr1w")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6qttg")
 text = "Back"
 
-[node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=469765131]
-volume_db = 5.0
-
-[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Panel/StartButton1" to="." method="_on_start_button_1_pressed"]
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Panel/StartButton" to="." method="_on_start_button_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_pressed"]

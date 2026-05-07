@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://okpub58oe5y4"]
 
-[ext_resource type="Texture2D" uid="uid://dbo0fib7agul1" path="res://assets/heroes/blood hunter.png" id="1_aox81"]
+[ext_resource type="Texture2D" uid="uid://dbo0fib7agul1" path="res://assets/heroes/blood_hunter_icon.png" id="1_aox81"]
 [ext_resource type="Script" uid="uid://cn2nic8goiihk" path="res://data/heroes/hero_data.gd" id="1_mahqm"]
 [ext_resource type="SpriteFrames" uid="uid://itwe4yj88cbr" path="res://data/heroes/blood_hunter_sprite_frames.tres" id="3_c3jk3"]
 

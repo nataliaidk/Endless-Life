@@ -18,9 +18,9 @@ config/icon="uid://lwbwa5xkwmhc"
 [autoload]
 
 GameTimer="*uid://cti5ikcpsrf4t"
-GameData="*uid://dn87tr2u3j40f"
-SaveManager="*res://scripts/game/save_manager.gd"
+SaveManager="*res://scripts/autoloads/save_manager.gd"
 MusicPlayer="*uid://dfndkdj51mx38"
+ButtonManager="*uid://ck17ycbiyx2m0"
 
 [display]
 

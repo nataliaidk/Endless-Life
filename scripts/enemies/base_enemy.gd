@@ -4,19 +4,28 @@ extends CharacterBody2D
 signal died
 
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
+@onready var collision_shape: CollisionShape2D = $HurtboxArea/Hurtbox
 @export var blood_exp_reward := 1
+
 const DAMAGE_FONT: FontFile = preload("res://assets/fonts/Gothikka.ttf")
-const BLOOD_TEXTURE: Texture2D = preload("res://assets/blood/1_100x100px.png")
+
+const BLOOD_TEXTURES: Array[Texture2D] = [
+		preload("res://assets/blood/blood_1.png"),
+		preload("res://assets/blood/blood_2.png"),
+		preload("res://assets/blood/blood_3.png"),
+		preload("res://assets/blood/blood_4.png"),
+		preload("res://assets/blood/blood_5.png")
+	]
 
 var speed := 100.0
 var max_health := 100
 var health := max_health
 var damage := 10
-var blood_lifetime := 0.4
 var is_dead := false
 var _player_in_range: Node2D = null
+var blood_scale := 1.0
 
-# Knockback
+var _last_dir := Vector2.ZERO
 var knockback_velocity := Vector2.ZERO
 var knockback_duration := 0.0
 var knockback_speed := 300.0
@@ -38,21 +47,29 @@ func _physics_process(_delta: float) -> void:
 	if is_dead or player == null:
 		return
 	
-	# Handle knockback
 	if knockback_duration > 0:
 		knockback_duration -= _delta
-		# Knockback only affects horizontal movement
-		velocity.x = knockback_velocity.x
-		var dir := global_position.direction_to(player.global_position)
-		velocity.y = dir.y * speed
+		velocity = knockback_velocity
 	else:
 		var dir := global_position.direction_to(player.global_position)
+		_last_dir = dir
 		velocity = dir * speed
 	
 	move_and_slide()
-	_update_animation(velocity.normalized())
+	_update_animation(_last_dir)
+	
+func _get_enemy_height() -> float:
+	for child in get_children():
+		if child is CollisionShape2D:
+			var shape = child.shape
+			if shape is CapsuleShape2D:
+				return shape.height
+			elif shape is RectangleShape2D:
+				return shape.size.y
+	print("fallback")
+	return 30.0
 
-# ── wirtualne metody  ────────────────────────────────────────────────────────
+# ── virtuals  ────────────────────────────────────────────────────────
 
 func _setup_visuals() -> void:
 	pass
@@ -63,17 +80,16 @@ func _update_animation(_dir: Vector2) -> void:
 func flash_red() -> void:
 	pass
 
-# ── walka ────────────────────────────────────────────────────────────────────
+# ── fight ────────────────────────────────────────────────────────────────────
 
 func take_damage(attack: Attack) -> void:
 	if is_dead:
 		return
 	_show_damage_number(attack.damage)
 	health -= attack.damage
-	_spawn_blood(blood_lifetime * 0.8, 16.0)
+	_spawn_blood_hit()
 	flash_red()
 	
-	# Apply knockback - push enemy AWAY from player
 	if is_instance_valid(player):
 		var knockback_dir := (global_position - player.global_position).normalized()
 		knockback_velocity = knockback_dir * knockback_speed
@@ -93,7 +109,7 @@ func die() -> void:
 	$Collision.set_deferred("disabled", true)
 	$DamageTimer.stop()
 	player.add_kill()
-	_spawn_blood(blood_lifetime * 1.3, 35.0)
+	_spawn_blood_death()
 	_spawn_blood_decal()
 	_drop_xp_gems()
 	queue_free()
@@ -106,7 +122,7 @@ func attack() -> void:
 	atk.position = global_position
 	_player_in_range.get_parent().take_damage(atk)
 
-# ── upuszczanie gemów XP ─────────────────────────────────────────────────────
+# ── XP ─────────────────────────────────────────────────────
 
 func _drop_xp_gems() -> void:
 	var gem_type := _roll_gem_type()
@@ -131,10 +147,10 @@ func _roll_gem_type() -> XpGem.Type:
 func _spawn_gem(gem_type: XpGem.Type) -> void:
 	var gem := XpGem.new()
 	gem.gem_type = gem_type
-	gem.global_position = global_position
+	gem.global_position = global_position + Vector2(0, _get_enemy_height())
 	get_parent().add_child(gem)
 
-# ── sygnały hitboxa / timera ─────────────────────────────────────────────────
+# ── signals ─────────────────────────────────────────────────
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if is_dead or not area.is_in_group("player"):
@@ -152,23 +168,50 @@ func _on_damage_timer_timeout() -> void:
 	if _player_in_range and not is_dead:
 		attack()
 
-# ── krew ─────────────────────────────────────────────────────────────────────
+# ── blood ─────────────────────────────────────────────────────────────────────
 
-func _spawn_blood(lifetime: float, vel_min: float) -> void:
+func _spawn_blood_hit() -> void:
 	var p := CPUParticles2D.new()
-	p.amount               = 18
+	p.amount               = 20
 	p.one_shot             = true
-	p.lifetime             = max(0.05, lifetime)
-	p.spread               = 55.0
-	p.initial_velocity_min = vel_min
-	p.initial_velocity_max = vel_min + 36.0
-	p.gravity              = Vector2(0, 75)
-	p.scale_amount_min     = 0.9
-	p.scale_amount_max     = 1.8
-	p.color                = Color(0.73, 0.05, 0.08, 0.85)
+	p.lifetime             = 0.35
+	p.spread               = 60.0
+	p.direction            = player.global_position.direction_to(global_position)
+	p.initial_velocity_min = 80.0
+	p.initial_velocity_max = 180.0
+	p.gravity              = Vector2(0, 300)
+	p.damping_min          = 60.0
+	p.damping_max          = 140.0
+	p.scale_amount_min     = 1.2 * blood_scale
+	p.scale_amount_max     = 3.0 * blood_scale
+	p.color                = Color(0.73, 0.05, 0.08, 0.9)
 	p.local_coords         = false
-	p.z_index              = 0
+	p.z_index              = 2
 	p.global_position      = global_position
+	get_parent().add_child(p)
+	p.emitting = true
+	await get_tree().create_timer(p.lifetime + 0.3).timeout
+	if is_instance_valid(p):
+		p.queue_free()
+
+func _spawn_blood_death() -> void:
+	var p := CPUParticles2D.new()
+	p.amount               = 50
+	p.one_shot             = true
+	p.lifetime             = 0.8
+	p.spread               = 60.0
+	p.direction            = Vector2(0, -1)
+	p.initial_velocity_min = 60.0
+	p.initial_velocity_max = 140.0
+	p.gravity              = Vector2(0, 400)
+	p.damping_min          = 40.0
+	p.damping_max          = 160.0
+	p.scale_amount_min     = 1.0 * blood_scale
+	p.scale_amount_max     = 4.0 * blood_scale
+	p.color                = Color(0.73, 0.05, 0.08, 0.95)
+	p.local_coords         = false
+	p.z_index              = 2
+	p.global_position      = global_position + Vector2(0, -_get_enemy_height() * 0.2)
 	get_parent().add_child(p)
 	p.emitting = true
 	await get_tree().create_timer(p.lifetime + 0.3).timeout
@@ -177,22 +220,13 @@ func _spawn_blood(lifetime: float, vel_min: float) -> void:
 
 func _spawn_blood_decal() -> void:
 	var decal := Node2D.new()
-	decal.global_position = global_position
-	decal.rotation = randf_range(0, TAU)
-	decal.z_index = 0
+	decal.global_position = global_position + Vector2(0, _get_enemy_height())
+	decal.z_index = 1
 	
 	var sprite := Sprite2D.new()
 	sprite.centered = true
-	
-	# Create AtlasTexture to extract the 2nd row, 1st column from the sprite sheet
-	var atlas := AtlasTexture.new()
-	atlas.atlas = BLOOD_TEXTURE
-	atlas.region = Rect2(0, 100, 100, 100)  # 2nd row, 1st column
-	
-	sprite.texture = atlas
-	sprite.scale = Vector2.ONE * randf_range(0.7, 1.2)
-	sprite.z_index = 0
-	sprite.modulate.a = 0.8
+	sprite.texture = BLOOD_TEXTURES.pick_random()
+	sprite.scale = Vector2.ONE * blood_scale
 	
 	decal.add_child(sprite)
 	get_parent().add_child(decal)

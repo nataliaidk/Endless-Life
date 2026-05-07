@@ -15,9 +15,10 @@ func _ready() -> void:
 		[XpGem.Type.MEDIUM, 0],
 		[XpGem.Type.LARGE,  0],
 	]
-	speed      = 130.0
-	max_health = 12
-	damage     = 4
+	speed       = 130.0
+	max_health  = 12
+	damage      = 4
+	blood_scale = 0.4
 	super()
 
 func _setup_visuals() -> void:

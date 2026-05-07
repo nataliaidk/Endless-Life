@@ -38,7 +38,7 @@ func _process(_delta):
 func add_kill():
 	kills += 1
 	kills_label.text = str(kills)
-	GameData.kills = kills
+	SaveManager.current_kills = kills
 
 func _on_weapon_added(weapon_data: WeaponData):
 	var index = weapon_manager.active_weapons.size() - 1
@@ -72,7 +72,7 @@ func _on_player_exp_gained(_amount: int):
 func _on_player_gold_gained(_amount: int):
 	gold += _amount
 	gold_label.text = str(gold)
-	GameData.gold = gold
+	SaveManager.current_gold = gold
 
 func _on_upgrade_applied(_upgrade: Dictionary):
 	_refresh_exp_bar()

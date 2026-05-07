@@ -91,6 +91,7 @@ mouse_filter = 2
 theme_override_constants/separation = 16
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1197629690]
+unique_name_in_owner = true
 process_mode = 3
 z_index = 100
 layout_mode = 2
@@ -109,6 +110,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_w8b6s")
 text = "Resume"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1625776958]
+unique_name_in_owner = true
 process_mode = 3
 z_index = 100
 layout_mode = 2

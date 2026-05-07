@@ -1,15 +1,12 @@
 extends CanvasLayer
 
-const HOVER_SOUND := preload("res://assets/sounds/button hover.mp3")
-
 var _current_choices: Array[Dictionary] = []
 
-@onready var leveling       = get_parent().get_node("LevelManager")
-@onready var audioPlayer    = get_parent().get_node("LevelUpAudioPlayer")
-@onready var ui_hover_audio = get_parent().get_node("ButtonsAudioPlayer")
-@onready var pass_button: Button =  %PassButton
+@onready var leveling = get_parent().get_node("LevelManager")
+@onready var audioPlayer = get_parent().get_node("LevelUpAudioPlayer")
+@onready var pass_button: Button = %PassButton
 @onready var level_up_panel: PanelContainer = %LevelUpPanel
-@onready var level_title: Label             = %LevelTitle
+@onready var level_title: Label = %LevelTitle
 @onready var level_up_buttons: Array[Button] = [
 	%ChoiceButton1, %ChoiceButton2, %ChoiceButton3
 ]
@@ -27,21 +24,12 @@ var _current_choices: Array[Dictionary] = []
 ]
 
 func _ready():
-	ui_hover_audio.stream = HOVER_SOUND
 	leveling.level_up_ready.connect(_on_level_up_ready)
 	pass_button.pressed.connect(_on_pass_pressed)
-
+	ButtonManager.setup_buttons(level_up_buttons)
+	ButtonManager.setup_buttons([pass_button])
 	for i in range(level_up_buttons.size()):
-		if i > 0:
-			level_up_buttons[i].focus_neighbor_left = level_up_buttons[i - 1].get_path()
-		if i < level_up_buttons.size() - 1:
-			level_up_buttons[i].focus_neighbor_right = level_up_buttons[i + 1].get_path()
-		level_up_buttons[i].mouse_entered.connect(_on_ui_hover)
-		level_up_buttons[i].focus_entered.connect(_on_ui_hover)
 		level_up_buttons[i].pressed.connect(_on_choice_pressed.bind(i))
-
-	pass_button.mouse_entered.connect(_on_ui_hover)
-	pass_button.focus_entered.connect(_on_ui_hover)
 	level_up_panel.visible = false
 
 func _on_level_up_ready(choices: Array[Dictionary]):
@@ -91,11 +79,6 @@ func _on_pass_pressed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 	leveling.on_upgrade_chosen(-1, _current_choices)
-
-func _on_ui_hover() -> void:
-	if ui_hover_audio.playing:
-		ui_hover_audio.stop()
-	ui_hover_audio.play()
 
 func _format_bonus(bonus: ItemLevelData) -> String:
 	var parts: Array[String] = []

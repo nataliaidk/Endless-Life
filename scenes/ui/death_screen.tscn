@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dcrooow8f1i2h" path="res://scripts/ui/death_screen.gd" id="1_gbdnc"]
 [ext_resource type="FontFile" uid="uid://ch3oxkxxaq75j" path="res://assets/fonts/Gothikka.ttf" id="2_gf2gt"]
 [ext_resource type="Texture2D" uid="uid://7v62mahm2sut" path="res://assets/ui/skull.png" id="3_aae5y"]
-[ext_resource type="AudioStream" uid="uid://cy54opqcn65xb" path="res://assets/sounds/You Died.mp3" id="3_gf2gt"]
+[ext_resource type="AudioStream" uid="uid://cy54opqcn65xb" path="res://assets/sounds/you_died.mp3" id="3_gf2gt"]
 [ext_resource type="Texture2D" uid="uid://c06ai48b76d8i" path="res://assets/ui/coin.png" id="3_nt8uq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7egq5"]
@@ -94,7 +94,8 @@ grow_vertical = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="TimerLabel" type="Label" parent="HBoxContainer" unique_id=1941185455]
+[node name="TimeLabel" type="Label" parent="HBoxContainer" unique_id=1941185455]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gf2gt")
 theme_override_font_sizes/font_size = 30
@@ -106,6 +107,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="KillsLabel" type="Label" parent="HBoxContainer/KillsContainer" unique_id=272700539]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_gf2gt")
 theme_override_font_sizes/font_size = 30
@@ -124,6 +126,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="GoldLabel" type="Label" parent="HBoxContainer/GoldContainer" unique_id=1568908359]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9607843, 0.8117647, 0.11372549, 1)
 theme_override_fonts/font = ExtResource("2_gf2gt")
@@ -152,7 +155,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="Back" type="Button" parent="VBoxContainer" unique_id=1277209109]
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1277209109]
+unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
@@ -174,7 +178,4 @@ stream = ExtResource("3_gf2gt")
 volume_db = -20.0
 autoplay = true
 
-[node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=142065225]
-volume_db = 5.0
-
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_pressed"]

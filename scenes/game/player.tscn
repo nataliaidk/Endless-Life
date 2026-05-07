@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://cgixofxjk8ylm"]
 
 [ext_resource type="Script" uid="uid://bcrbdmorebsqq" path="res://scripts/game/player.gd" id="1_cqjlk"]
-[ext_resource type="AudioStream" uid="uid://crxi7h0xqueox" path="res://assets/sounds/male death.mp3" id="2_judl8"]
-[ext_resource type="AudioStream" uid="uid://cdev14qm7jhnw" path="res://assets/sounds/male hurt 1.mp3" id="3_51fhs"]
-[ext_resource type="AudioStream" uid="uid://c0g07r3qcix15" path="res://assets/sounds/male hurt 2.mp3" id="4_pft2h"]
-[ext_resource type="AudioStream" uid="uid://bhv4aqea3wd3n" path="res://assets/sounds/male hurt 3.mp3" id="5_rpvn3"]
+[ext_resource type="AudioStream" uid="uid://crxi7h0xqueox" path="res://assets/sounds/male_death.mp3" id="2_judl8"]
+[ext_resource type="AudioStream" uid="uid://cdev14qm7jhnw" path="res://assets/sounds/male_hurt_1.mp3" id="3_51fhs"]
+[ext_resource type="AudioStream" uid="uid://c0g07r3qcix15" path="res://assets/sounds/male_hurt_2.mp3" id="4_pft2h"]
+[ext_resource type="AudioStream" uid="uid://bhv4aqea3wd3n" path="res://assets/sounds/male_hurt_3.mp3" id="5_rpvn3"]
 [ext_resource type="Texture2D" uid="uid://dqyv1nejjaco1" path="res://assets/ui/healthbar_background.png" id="6_v7uls"]
 [ext_resource type="Texture2D" uid="uid://kuheauej3ubv" path="res://assets/ui/healthbar_progress.png" id="7_ynh2p"]
 [ext_resource type="SpriteFrames" uid="uid://itwe4yj88cbr" path="res://data/heroes/blood_hunter_sprite_frames.tres" id="8_xfcrr"]
@@ -153,7 +153,7 @@ corner_radius_bottom_left = 16
 shadow_size = 5
 
 [node name="Player" type="CharacterBody2D" unique_id=1140903298 groups=["player"]]
-z_index = 1
+z_index = 3
 collision_layer = 8
 collision_mask = 8
 platform_on_leave = 2
@@ -705,7 +705,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_pft2h")
 text = "PASS"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=446460250]
-volume_db = -10.0
+volume_db = -15.0
 
 [node name="LevelingAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1050267213]
 stream = ExtResource("33_bo8sf")
@@ -716,9 +716,8 @@ process_mode = 3
 stream = ExtResource("34_dbo1r")
 volume_db = -15.0
 
-[node name="ButtonsAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1464709795]
-
 [node name="HealTimer" type="Timer" parent="." unique_id=229005779]
 autostart = true
 
+[connection signal="pressed" from="LevelUpMenu/LevelUpPanel/LevelUpPanel2/MarginContainer/VBoxContainer/PassButton" to="." method="_on_pass_pressed"]
 [connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

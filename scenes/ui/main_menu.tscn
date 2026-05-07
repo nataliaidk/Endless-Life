@@ -76,7 +76,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="StartGame" type="Button" parent="VBoxContainer" unique_id=2123456702]
+[node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=2123456702]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -92,7 +93,8 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
 text = "Start Game"
 
-[node name="Upgrade" type="Button" parent="VBoxContainer" unique_id=2123456703]
+[node name="UpgradeButton" type="Button" parent="VBoxContainer" unique_id=2123456703]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -108,7 +110,8 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_16onh")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3r4tm")
 text = "Upgrades"
 
-[node name="Exit" type="Button" parent="VBoxContainer" unique_id=2123456704]
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=2123456704]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -143,9 +146,6 @@ theme_override_constants/shadow_offset_y = 6
 theme_override_fonts/font = ExtResource("3_wb0q5")
 theme_override_font_sizes/font_size = 89
 text = "Endless Blood"
-
-[node name="AudioStreamPlayerButton" type="AudioStreamPlayer" parent="." unique_id=1176650924]
-volume_db = 5.0
 
 [node name="BestScoreContainer" type="VBoxContainer" parent="." unique_id=788239337]
 layout_mode = 0
@@ -213,6 +213,6 @@ texture = ExtResource("6_7suek")
 expand_mode = 1
 stretch_mode = 5
 
-[connection signal="pressed" from="VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/UpgradeButton" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]

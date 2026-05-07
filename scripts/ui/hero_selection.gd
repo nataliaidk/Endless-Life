@@ -1,36 +1,28 @@
 extends Control
 
-var hover_sound := preload("res://assets/sounds/button hover.mp3")
-
 @export var heroes: Array[HeroData] = []
 
-@onready var audio = $AudioStreamPlayerButton
-@onready var start_button := %StartButton1
-@onready var stat_label11 := %StatLabel11
-@onready var stat_label12 := %StatLabel12
-@onready var stat_label13 := %StatLabel13
-@onready var name_label := %NameLabel1
-@onready var icon := %Icon1
-@onready var back_button = $VBoxContainer/Back
+@onready var start_button: Button= %StartButton
+@onready var health_label: Label = %HealthLabel
+@onready var speed_label: Label = %SpeedLabel
+@onready var luck_label: Label = %LuckLabel
+@onready var name_label: Label = %NameLabel
+@onready var hero_icon: TextureRect = %HeroIcon
+@onready var back_button: Button = %BackButton
 
 func _ready() -> void:
-	start_button.mouse_entered.connect(_on_hover)
-	back_button.mouse_entered.connect(_on_hover)
-	start_button.focus_entered.connect(_on_hover)
-	back_button.focus_entered.connect(_on_hover)
-	start_button.focus_neighbor_bottom = back_button.get_path()
-	back_button.focus_neighbor_top = start_button.get_path()
+	ButtonManager.setup_buttons([start_button, back_button])
 	start_button.grab_focus()
-	_select(0)
+	_select_hero(0)
 
-func _select(index: int) -> void:
+func _select_hero(index: int) -> void:
 	var h = heroes[index]
 	var i = index
 	name_label.text = h.hero_name
-	stat_label11.text = "HP: %d" % SaveManager.get_stat(i, "max_health", h.max_health)
-	stat_label12.text = "SPEED: %d" % SaveManager.get_stat(i, "speed", h.speed)
-	stat_label13.text = "LUCK: %d" % SaveManager.get_stat(i, "luck", h.luck)
-	icon.texture = h.icon
+	health_label.text = "HEALTH: %d" % SaveManager.get_stat(i, "max_health", h.max_health)
+	speed_label.text = "SPEED: %d" % SaveManager.get_stat(i, "speed", h.speed)
+	luck_label.text = "LUCK: %d" % SaveManager.get_stat(i, "luck", h.luck)
+	hero_icon.texture = h.icon
 
 func _on_start_button_1_pressed() -> void:
 	SaveManager.selected_hero = heroes[0]
@@ -39,7 +31,3 @@ func _on_start_button_1_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
-
-func _on_hover():
-	audio.stream = hover_sound
-	audio.play()
