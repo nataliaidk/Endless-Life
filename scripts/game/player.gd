@@ -9,29 +9,60 @@ signal exp_gained(amount: int)
 @onready var weapon_manager: WeaponManager = $WeaponManager
 @onready var audio = $AudioStreamPlayer
 @onready var timer: Timer = $HealTimer
+@onready var hud := $PlayerHud
 
 @export var die_sound: AudioStream
 @export var hurt_sounds: Array[AudioStream]
 
-var speed := 200.0
-var max_health := 100
-var health := max_health
-var is_dead := false
 var facing_direction := Vector2.DOWN
 var facing_direction_x := 1
+var is_dead := false
 var is_attacking := false
-var hp_regen := 1
-var luck := 0
-var _gold_per_second := 1
+var health := 0
+
+var base_max_health: int = 100
+var base_speed: int = 200
+var base_luck: int = 0
+var base_hp_regen: int = 1
+var base_gold_gain: int = 1
+
+var bonus_max_hp: int = 0
+var bonus_speed: int = 0
+var bonus_luck: int = 0
+var bonus_hp_regen: int = 0
+var bonus_xp_gain: int = 0
+var bonus_gold_gain: int = 0
+var bonus_pickup_range: int = 0
+var bonus_effect_duration: int = 0
+var bonus_attack_size: int = 0
+var bonus_shield: int = 0
+var bonus_move_speed: int = 0
+var bonus_attack_speed: int = 0
+var bonus_projectile_count: int = 0
+var bonus_holy_damage: int = 0
+var bonus_fire_damage: int = 0
+var bonus_blood_damage: int = 0
+var bonus_physical_damage: int = 0
+
+var max_health: int: 
+	get: return base_max_health + bonus_max_hp
+var speed: int:
+	get: return base_speed + bonus_speed
+var luck: int:
+	get: return base_luck + bonus_luck
+var hp_regen: int:
+	get: return base_hp_regen + bonus_hp_regen
+var gold_gain: int:
+	get: return base_gold_gain + bonus_gold_gain
 
 func _ready():
 	camera.make_current()
 	
 	var h = SaveManager.selected_hero
 	var i = SaveManager.selected_hero_index
-	max_health = SaveManager.get_stat(i, "max_health", h.max_health)
-	speed = SaveManager.get_stat(i, "speed", h.speed)
-	luck = SaveManager.get_stat(i, "luck", h.luck)
+	base_max_health = SaveManager.get_stat(i, "max_health", h.max_health)
+	base_speed      = SaveManager.get_stat(i, "speed", h.speed)
+	base_luck       = SaveManager.get_stat(i, "luck", h.luck)
 	sprite.sprite_frames = h.sprite_frames
 	
 	health = max_health
@@ -72,14 +103,16 @@ func update_animation(direction: Vector2):
 func take_damage(attack: Attack):
 	if is_dead:
 		return
-	health -= attack.damage
-	health_bar.value = health
-	flash_red()
-	if health <= 0:
-		die()
-	else:
-		audio.stream = hurt_sounds.pick_random()
-		audio.play()
+	var damage: int = max(attack.damage - bonus_shield, 0)
+	if damage > 0:
+		health -= damage
+		health_bar.value = health
+		flash_red()
+		if health <= 0:
+			die()
+		else:
+			audio.stream = hurt_sounds.pick_random()
+			audio.play()
 
 func flash_red():
 	sprite.modulate = Color(1, 0.3, 0.3)
@@ -99,7 +132,7 @@ func die():
 	get_tree().change_scene_to_file("res://scenes/ui/death_screen.tscn")
 
 func add_kill():
-	$PlayerHud.add_kill()
+	hud.add_kill()
 
 func gain_xp(amount: int):
 	if is_dead or amount <= 0:
@@ -107,7 +140,25 @@ func gain_xp(amount: int):
 	exp_gained.emit(amount)
 
 func apply_bonus(bonus: ItemLevelData) -> void:
-	hp_regen = 1 + bonus.hp_regen
+	bonus_xp_gain          = bonus.xp_gain
+	bonus_gold_gain        = bonus.gold_gain
+	bonus_pickup_range     = bonus.pickup_range
+	bonus_effect_duration  = bonus.effect_duration
+	bonus_luck             = bonus.luck
+	bonus_attack_size      = bonus.attack_size
+	bonus_shield           = bonus.shield
+	bonus_move_speed       = bonus.move_speed
+	bonus_max_hp           = bonus.max_hp
+	bonus_hp_regen         = bonus.hp_regen
+	bonus_attack_speed     = bonus.attack_speed
+	bonus_projectile_count = bonus.projectile_count
+	bonus_holy_damage      = bonus.holy_damage
+	bonus_fire_damage      = bonus.fire_damage
+	bonus_blood_damage     = bonus.blood_damage
+	bonus_physical_damage  = bonus.physical_damage
+	
+	health_bar.max_value = max_health
+	health = min(health + bonus.max_hp, max_health)
 
 func _on_heal_timer_timeout() -> void:
 	health = min(max_health, health + hp_regen)

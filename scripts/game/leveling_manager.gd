@@ -5,14 +5,17 @@ signal upgrade_applied(upgrade: Dictionary)
 
 @export var item_pool: Array[ItemData] = []
 
+@onready var player = get_parent()
+@onready var weapon_manager = player.get_node("WeaponManager")
+
+const MAX_ITEMS := 6
+const OWNED_WEIGHT := 3
+
 var blood_exp := 0
 var player_level := 1
 var item_levels: Dictionary = {}
 var _pending_requirement := 0
 var _in_progress := false
-
-@onready var player = get_parent()
-@onready var weapon_manager = player.get_node("WeaponManager")
 
 func _ready():
 	player.exp_gained.connect(_on_exp_gained)
@@ -65,37 +68,63 @@ func _finish_level_up(choice: Dictionary):
 	_try_trigger_level_up()
 
 func _roll_choices() -> Array[Dictionary]:
-	var available: Array[ItemData] = []
+	var owned: Array[ItemData] = []
+	var new_items: Array[ItemData] = []
+	
+	var slots_used := 0
 	for item in item_pool:
 		var level: int = item_levels.get(item, 0)
-		if level < item.max_level:
-			available.append(item)
-
-	if available.is_empty():
+		if level > 0:
+			slots_used += 1
+		if level >= item.max_level:
+			continue
+		if level > 0:
+			owned.append(item)
+		else:
+			new_items.append(item)
+	
+	var slots_full := slots_used >= MAX_ITEMS
+	
+	var weighted: Array[ItemData] = []
+	for item in owned:
+		for _i in range(OWNED_WEIGHT):
+			weighted.append(item)
+	if not slots_full:
+		weighted.append_array(new_items)
+	
+	if weighted.is_empty():
 		return []
-
-	available.shuffle()
-	var count := mini(3, available.size())
+	
+	weighted.shuffle()
+	
+	var seen: Array[ItemData] = []
 	var result: Array[Dictionary] = []
-
-	for i in range(count):
-		var item: ItemData = available[i]
+	for item in weighted:
+		if item in seen:
+			continue
+		seen.append(item)
 		var current_level: int = item_levels.get(item, 0)
 		var next_level := current_level + 1
 		if item.bonuses.is_empty() or next_level > item.bonuses.size():
 			continue
-		var bonus_preview: ItemLevelData = item.bonuses[next_level - 1]
-		var is_new: bool = current_level == 0
 		result.append({
 			"type": "item",
 			"item": item,
 			"name": item.name,
 			"level": next_level,
 			"icon": item.icon,
-			"bonus_preview": bonus_preview,
-			"is_new": is_new,
+			"bonus_preview": item.bonuses[next_level - 1],
+			"is_new": current_level == 0,
 		})
-
+		if result.size() >= 3:
+			break
+	
+	if result.size() < 3 and not result.is_empty():
+		var original := result.duplicate()
+		while result.size() < 3:
+			result.append_array(original)
+		result.resize(3)
+	
 	return result
 
 func _required_blood(target_level: int) -> int:

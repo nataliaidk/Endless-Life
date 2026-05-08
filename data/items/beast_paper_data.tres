@@ -6,27 +6,27 @@
 
 [sub_resource type="Resource" id="Resource_7en25"]
 script = ExtResource("1_5e8xl")
-physical_damage = 1
+physical_damage = 2
 metadata/_custom_type_script = "uid://br4dsciwujuog"
 
 [sub_resource type="Resource" id="Resource_uo56j"]
 script = ExtResource("1_5e8xl")
-physical_damage = 2
+physical_damage = 4
 metadata/_custom_type_script = "uid://br4dsciwujuog"
 
 [sub_resource type="Resource" id="Resource_4062q"]
 script = ExtResource("1_5e8xl")
-physical_damage = 3
+physical_damage = 6
 metadata/_custom_type_script = "uid://br4dsciwujuog"
 
 [sub_resource type="Resource" id="Resource_p20iv"]
 script = ExtResource("1_5e8xl")
-physical_damage = 4
+physical_damage = 8
 metadata/_custom_type_script = "uid://br4dsciwujuog"
 
 [sub_resource type="Resource" id="Resource_3fywl"]
 script = ExtResource("1_5e8xl")
-physical_damage = 5
+physical_damage = 10
 metadata/_custom_type_script = "uid://br4dsciwujuog"
 
 [resource]

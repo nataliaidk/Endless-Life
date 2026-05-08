@@ -11,7 +11,7 @@ func _ready() -> void:
 	]
 	speed       = 75.0
 	max_health  = 25
-	damage      = 10
+	damage      = 11
 	blood_scale = 0.9
 	super()
 

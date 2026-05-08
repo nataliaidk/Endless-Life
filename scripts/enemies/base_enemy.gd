@@ -198,12 +198,12 @@ func _spawn_blood_death() -> void:
 	var p := CPUParticles2D.new()
 	p.amount               = 50
 	p.one_shot             = true
-	p.lifetime             = 0.8
+	p.lifetime             = 0.4
 	p.spread               = 60.0
 	p.direction            = Vector2(0, -1)
 	p.initial_velocity_min = 60.0
 	p.initial_velocity_max = 140.0
-	p.gravity              = Vector2(0, 400)
+	p.gravity              = Vector2(0, 700)
 	p.damping_min          = 40.0
 	p.damping_max          = 160.0
 	p.scale_amount_min     = 1.0 * blood_scale
@@ -214,7 +214,7 @@ func _spawn_blood_death() -> void:
 	p.global_position      = global_position + Vector2(0, -_get_enemy_height() * 0.2)
 	get_parent().add_child(p)
 	p.emitting = true
-	await get_tree().create_timer(p.lifetime + 0.3).timeout
+	await get_tree().create_timer(p.lifetime + 0.1).timeout
 	if is_instance_valid(p):
 		p.queue_free()
 
