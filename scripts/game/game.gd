@@ -11,10 +11,12 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	MusicPlayer.set_volume(0.1)
 	MusicPlayer.play_music(TRACKS.pick_random())
-	SaveManager.reset_state()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and not get_tree().paused:
 			get_tree().paused = true
 			var pause := PAUSE_SCENE.instantiate()
 			get_tree().root.add_child(pause)
+
+func _on_gold_timer_timeout() -> void:
+	$Player.gain_gold()

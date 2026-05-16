@@ -14,8 +14,9 @@ func _ready():
 	start_button.grab_focus()
 	#SaveManager.reset_save()
 	
+	var t := SaveManager.best_time
 	kills_label.text = str(SaveManager.best_kills)
-	time_label.text = "%02d:%02d" % [int(SaveManager.best_time) / 60, int(SaveManager.best_time) % 60]
+	time_label.text = "%02d:%02d" % [int(t) / 60, int(t) % 60]
 	gold_label.text = str(SaveManager.gold)
 
 func _on_start_game_pressed() -> void:

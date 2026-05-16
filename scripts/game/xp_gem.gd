@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		return
 	var dist := global_position.distance_to(_player.global_position)
 
-	if dist <= magnet_radius:
+	if dist <= magnet_radius + _player.bonus_pickup_range:
 		_attracted = true
 	else:
 		_attracted = false

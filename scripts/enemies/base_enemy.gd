@@ -1,8 +1,6 @@
 class_name BaseEnemy
 extends CharacterBody2D
 
-signal died
-
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
 @onready var collision_shape: CollisionShape2D = $HurtboxArea/Hurtbox
 @export var blood_exp_reward := 1

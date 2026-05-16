@@ -12,14 +12,16 @@ func _ready():
 	back_button.grab_focus()
 	
 	var survival_time = int(GameTimer.seconds())
-	var gold_earned = survival_time + SaveManager.current_gold
-
-	timer_label.text = "%02d:%02d" % [int(GameTimer.seconds()) / 60, int(GameTimer.seconds()) % 60]
-	kills_label.text = "%d" % SaveManager.current_kills
+	var gold_earned = GameData.current_gold
+	var kills = GameData.current_kills
+	var t := GameTimer.seconds()
+	
+	timer_label.text = "%02d:%02d" % [int(t) / 60, int(t) % 60]
+	kills_label.text = "%d" % kills
 	gold_label.text = "+ %d" % gold_earned
 	
 	SaveManager.add_gold(gold_earned)
-	SaveManager.on_game_over(survival_time)
+	SaveManager.on_game_over(survival_time, kills)
 
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

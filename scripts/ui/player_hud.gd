@@ -2,9 +2,6 @@ extends CanvasLayer
 
 const UI_FONT := preload("res://assets/fonts/Gothikka.ttf")
 
-var kills: int = 0
-var gold: int = 0
-
 @onready var player          = get_parent()
 @onready var leveling        = get_parent().get_node("LevelManager")
 @onready var weapon_manager  = get_parent().get_node("WeaponManager")
@@ -40,9 +37,8 @@ func _process(_delta):
 	time_label.text = "%d:%02d" % [minutes, secs]
 
 func add_kill():
-	kills += 1
-	kills_label.text = str(kills)
-	SaveManager.current_kills = kills
+	GameData.add_kill()
+	kills_label.text = str(GameData.current_kills)
 
 func _on_weapon_added(weapon_data: WeaponData):
 	var index = weapon_manager.active_weapons.size() - 1
@@ -95,11 +91,11 @@ func _refresh_item_label(index: int, item_data: ItemData, level: int) -> void:
 func _on_player_exp_gained(_amount: int):
 	_refresh_exp_bar()
 
-func _on_player_gold_gained(_amount: int):
-	gold += _amount
-	gold_label.text = str(gold)
-	SaveManager.current_gold = gold
-
+func _on_player_gold_gained(amount: int):
+	_show_gold_number(amount)
+	GameData.add_gold(amount)
+	gold_label.text = str(GameData.current_gold)
+	
 func _on_upgrade_applied(_upgrade: Dictionary):
 	_refresh_exp_bar()
 	_refresh_all_item_labels()
@@ -119,3 +115,31 @@ func _refresh_exp_bar():
 func _to_roman(n: int) -> String:
 	var romans := ["I", "II", "III", "IV", "V"]
 	return romans[clampi(n - 1, 0, romans.size() - 1)]
+
+func _show_gold_number(amount: int) -> void:
+	if amount <= 0:
+		return
+	var label := Label.new()
+	label.text = "+%d" % amount
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_override("font", UI_FONT)
+	label.add_theme_font_size_override("font_size", 24)
+	label.add_theme_color_override("font_color", Color(1.0, 0.85, 0.1, 1.0))
+	label.add_theme_color_override("font_outline_color", Color(0.4, 0.25, 0.0, 1.0))
+	label.add_theme_constant_override("outline_size", 4)
+	label.z_index = 35
+
+	gold_label.get_parent().add_child(label) 
+
+	var gold_rect := gold_label.get_rect()
+	label.position = gold_rect.get_center() + Vector2(0, -gold_rect.size.y)
+
+	var tween := label.create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(label, "position", label.position + Vector2(0, -48), 1.2)
+	tween.parallel().tween_property(label, "modulate:a", 0.0, 0.9)
+	
+	await tween.finished
+	if is_instance_valid(label):
+		label.queue_free()

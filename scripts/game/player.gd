@@ -26,7 +26,7 @@ var base_max_health: int = 100
 var base_speed: int = 200
 var base_luck: int = 0
 var base_hp_regen: int = 1
-var base_gold_gain: int = 1
+var base_gold_gain: int = 3
 
 var collected_bonuses: Array[ItemLevelData] = []
 
@@ -144,6 +144,11 @@ func gain_xp(amount: int):
 		return
 	exp_gained.emit(amount)
 
+func gain_gold():
+	var amount = base_gold_gain + bonus_gold_gain
+	if is_dead or amount <= 0:
+		return
+	hud._on_player_gold_gained(amount)
 
 func apply_bonus(bonus: ItemLevelData) -> void:
 	collected_bonuses = collected_bonuses.filter(func(b): return b.item_id != bonus.item_id)

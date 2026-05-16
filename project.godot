@@ -21,6 +21,7 @@ GameTimer="*uid://cti5ikcpsrf4t"
 SaveManager="*res://scripts/autoloads/save_manager.gd"
 MusicPlayer="*uid://dfndkdj51mx38"
 ButtonManager="*uid://ck17ycbiyx2m0"
+GameData="*uid://4xds8v2rvsbx"
 
 [display]
 

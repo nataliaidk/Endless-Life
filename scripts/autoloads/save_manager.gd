@@ -7,10 +7,9 @@ var gold: int = 0
 var upgrade_cost: int = 50
 var best_time: float = 0.0
 var best_kills: int = 0
-var current_kills: int = 0
-var current_gold: int = 0
 var selected_hero: HeroData = null
 var selected_hero_index: int = 0
+
 var all_heroes: Array[HeroData] = [
 	preload("res://data/heroes/blood_hunter.tres"),
 ]
@@ -28,12 +27,12 @@ const SAVE_PATH = "user://save.json"
 func _ready() -> void:
 	load_game()
 
-func on_game_over(time: float) -> void:
+func on_game_over(time: float, kills: int) -> void:
 	if time > best_time:
 		best_time = time
-	if current_kills > best_kills:
-		best_kills = current_kills
-	reset_state()
+	if kills > best_kills:
+		best_kills = kills
+	GameData.reset_state()
 	save_game()
 
 func get_stat(hero_index: int, stat: String, base: int) -> int:
@@ -63,10 +62,6 @@ func upgrade_hero_stat(hero_index: int, stat: String) -> bool:
 func add_gold(amount: int) -> void:
 	gold += amount
 	gold_changed.emit()
-
-func reset_state() -> void:
-	current_gold = 0
-	current_kills = 0
 
 func reset_save() -> void:
 	gold = 2000
